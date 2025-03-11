@@ -35,6 +35,9 @@
     zoxide
     yazi
     superfile
+
+    hyperfine
+    wezterm
   ];
 
   programs.git = {

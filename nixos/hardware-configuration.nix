@@ -19,29 +19,60 @@
   #     options = [ "subvol=@" ];
   #   };
   #
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A8D5-BA39";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+  # fileSystems."/boot" =
+  #   { device = "/dev/disk/by-uuid/A8D5-BA39";
+  #     fsType = "vfat";
+  #     options = [ "fmask=0077" "dmask=0077" ];
+  #   };
 
   fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "defaults" "size=50%" "mode=755" ];
+    # device = "/dev/disk/by-uuid/a64f15bb-720f-440c-a11e-ddd04a30931f";
+    device = "/dev/nvme0n1p5";
+    fsType = "btrfs";
+    options = [ "subvol=root" ];
   };
 
+  boot.initrd.postResumeCommands = lib.mkAfter ''
+    mkdir /btrfs_tmp
+    mount /dev/disk/by-uuid/a64f15bb-720f-440c-a11e-ddd04a30931f /btrfs_tmp
+    if [[ -e /btrfs_tmp/root ]]; then
+        mkdir -p /btrfs_tmp/old_roots
+        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+    fi
+
+    delete_subvolume_recursively() {
+        IFS=$'\n'
+        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+            delete_subvolume_recursively "/btrfs_tmp/$i"
+        done
+        btrfs subvolume delete "$1"
+    }
+
+    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+        delete_subvolume_recursively "$i"
+    done
+
+    btrfs subvolume create /btrfs_tmp/root
+    umount /btrfs_tmp
+  '';
+
   fileSystems."/persistent" = {
-    device = "/dev/root_vg/root";
+    device = "/dev/nvme0n1p5";
     neededForBoot = true;
     fsType = "btrfs";
     options = [ "subvol=persistent" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/root_vg/root";
+    device = "/dev/nvme0n1p5";
     fsType = "btrfs";
     options = [ "subvol=nix" ];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/A8D5-BA39";
+    fsType = "vfat";
   };
 
   swapDevices = [ ];

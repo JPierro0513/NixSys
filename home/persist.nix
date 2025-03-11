@@ -1,5 +1,6 @@
+{ inputs, ... }:
 {
-  imports = [ impermanence.homeManagerModules.impermanence ];
+  imports = [ inputs.impermanence.homeManagerModules.impermanence ];
 
   home.persistence."/persistent/home/jpierro" = {
     directories = [

@@ -9,10 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermenence = {
-      url = "github:nix-community/impermenence";
-      inputs.nixpks.follows = "nixpkgs";
-    };
+    impermanence.url = "github:nix-community/impermanence";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +40,7 @@
 	      modules =
 	        [ ./nixos/configuration.nix
 	          inputs.home-manager.nixosModules.home-manager
-	          impermenence.nixosModules.impermenence
+	          inputs.impermanence.nixosModules.impermanence
 	          {
                     home-manager = {
 	              useGlobalPkgs = true;

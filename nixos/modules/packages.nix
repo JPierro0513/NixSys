@@ -36,6 +36,8 @@
     hyprland
 
     jq nox nix grc
+
+    plymouth
   ];
 
   programs.nix-ld = {

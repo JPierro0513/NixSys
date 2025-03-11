@@ -2,6 +2,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      ./persist.nix
       ./hardware-configuration.nix
       ./modules/services
       ./modules/packages.nix

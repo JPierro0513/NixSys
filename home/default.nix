@@ -6,8 +6,9 @@
 }: {
   
   imports =
-    [ ./modules/packages.nix
-      ./modules/shell.nix
+    [ ./persist.nix
+      ./modules/packages.nix
+      # ./modules/shell.nix
       ./modules/hyprland.nix
       ./modules/theming.nix
     ];

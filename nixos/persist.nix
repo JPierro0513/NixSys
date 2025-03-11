@@ -1,4 +1,8 @@
 {
+  programs.fuse = {
+    userAllowOther = true;
+  };
+
   environment.persistence."/persistent" = {
     enable = true;  # NB: Defaults to true, not needed
     hideMounts = true;
