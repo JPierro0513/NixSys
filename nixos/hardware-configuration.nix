@@ -13,17 +13,36 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a64f15bb-720f-440c-a11e-ddd04a30931f";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
-    };
-
+  # fileSystems."/" =
+  #   { device = "/dev/disk/by-uuid/a64f15bb-720f-440c-a11e-ddd04a30931f";
+  #     fsType = "btrfs";
+  #     options = [ "subvol=@" ];
+  #   };
+  #
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/A8D5-BA39";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+
+  fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=50%" "mode=755" ];
+  };
+
+  fileSystems."/persistent" = {
+    device = "/dev/root_vg/root";
+    neededForBoot = true;
+    fsType = "btrfs";
+    options = [ "subvol=persistent" ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/root_vg/root";
+    fsType = "btrfs";
+    options = [ "subvol=nix" ];
+  };
 
   swapDevices = [ ];
 
