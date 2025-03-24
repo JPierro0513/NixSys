@@ -15,7 +15,6 @@
     python3Packages.psutil
     temurin-bin
     go
-    rust
     cargo
     nil
     nixd

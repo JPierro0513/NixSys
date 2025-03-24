@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "scrolls",
+  "version": "${version}",
+  "name": "scrolls",
+  "description": "A mod adding a little bit of magic to minecraft in the form of scrolls!",
+  "authors": ["Me!"],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/scrolls/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["scrolls.Scrolls"],
+    "client": ["scrolls.ScrollsClient"],
+    "fabric-datagen": ["scrolls.ScrollsDataGenerator"]
+  },
+  "mixins": [
+    "scrolls.mixins.json",
+    {
+      "config": "scrolls.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "emi": "*"
+  }
+}

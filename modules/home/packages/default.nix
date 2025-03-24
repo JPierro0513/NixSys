@@ -1,4 +1,3 @@
-# {pkgs, ...}:
 {
   imports = [
     ./desktop.nix
@@ -6,6 +5,4 @@
     ./games.nix
     ./spicetify.nix
   ];
-
-  # home.packages = with pkgs; [];
 }

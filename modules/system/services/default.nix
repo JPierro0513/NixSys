@@ -3,7 +3,7 @@
     ./audio.nix
     ./bluetooth.nix
     ./power.nix
-    ./display-manager.nix
+    # ./display-manager.nix
     ./security.nix
   ];
   services.printing.enable = true;

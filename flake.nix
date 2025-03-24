@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
+    # impermanence.url = "github:nix-community/impermanence";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +33,7 @@
     self,
     nixpkgs,
     home-manager,
-    impermanence,
+    # impermanence,
     neovim-nightly-overlay,
     ...
   }: let
@@ -57,8 +57,8 @@
             extraOptions = ''download-buffer-size = 500000000'';
             settings = {
               auto-optimise-store = true;
-              extraOptions = [
-                "experimental-features = nix-command flakes"
+              experimental-features = [
+                "nix-command flakes"
               ];
               substituters = [
                 "https://hyprland.cachix.org"

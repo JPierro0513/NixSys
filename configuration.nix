@@ -10,11 +10,11 @@
     (modulesPath + "/installer/scan/not-detected.nix")
 
     inputs.home-manager.nixosModules.home-manager
-    inputs.impermanence.nixosModules.impermanence
+    # inputs.impermanence.nixosModules.impermanence
     inputs.walker.nixosModules.walker
 
     ./modules/system/filesystem.nix
-    ./modules/system/persist.nix
+    # ./modules/system/persist.nix
     ./modules/system/fonts.nix
     ./modules/system/services
     ./modules/system/packages
@@ -45,7 +45,7 @@
   services.xserver.xkb = {
     layout = "us";
     model = "pc104";
-    variant = "intl";
+    variant = "qwerty";
   };
   console = {
     font = "Lat2-Terminus16";
@@ -59,22 +59,25 @@
       enable32Bit = true;
       extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd];
     };
-    amdgpu.amdvlk.enable = true;
+    # amdgpu.amdvlk.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
+  programs.nushell.enable = true;
+  # programs.fish.enable = true;
   users = {
     # mutableUsers = false;
     defaultUserShell = pkgs.zsh;
-    users.root.hashedPasswordFile = "/persist/passwords/root";
+    # users.root.hashedPasswordFile = "/persist/passwords/root";
     users.jpierro = {
-      hashedPasswordFile = "/persist/passwords/jpierro";
+      # hashedPasswordFile = "/persist/passwords/jpierro";
       isNormalUser = true;
       extraGroups = ["wheel" "networkmanager" "audio" "video"];
+      shell = pkgs.nushell;
     };
   };
-  programs.fuse.userAllowOther = true;
+  # programs.fuse.userAllowOther = true;
   environment.localBinInPath = true;
 
   system.stateVersion = "25.05";
