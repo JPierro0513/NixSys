@@ -20,13 +20,14 @@
 	if test $transient_pipestatus[-1] -ne 0
 	  set color red
 	end
-	echo -en (set_color brblack)"["(data "+%I:%M")"]" "(set_color $color)"❱ "(set_color normal)
+	echo -en (set_color brblack)"["(date "+%I:%M")"] "(set_color $color)"❱ "(set_color normal)
       end
 
-      set $fish_prompt_pwd_dir_length 3
-      set $hydro_multiline true
-      set $hydro_color_prompt green
-      set $hydro_color_duration orange
+      set fish_prompt_pwd_dir_length 3
+      set hydro_multiline true
+      set hydro_color_prompt green
+      set hydro_color_duration yellow
+      set hydro_color_pwd blue
     '';
     shellAliases = {
       "update" ="sudo nixos-rebuild switch";
