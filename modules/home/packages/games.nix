@@ -15,5 +15,6 @@
     nzportable
     forge-mtg
     cockatrice
+    xmage
   ];
 }

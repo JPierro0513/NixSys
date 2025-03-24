@@ -18,15 +18,18 @@
       SDL
       SDL2
       ncurses
-      alsa-lib
-      libxkbcommon
-      wayland
-      libvulkan
-      xorg.libxcb
-      # required by livekit:
-      libGL
-      xorg.libX11
-      xorg.libXext
+      # zlib
+      # zstd
+      # wayland
+      # libglvnd
+      # alsa-lib
+      # libxkbcommon
+      # xorg.libxcb
+      # vulkan-loader
+      # # required by livekit:
+      # libGL
+      # xorg.libX11
+      # xorg.libXext
     ];
   };
 
