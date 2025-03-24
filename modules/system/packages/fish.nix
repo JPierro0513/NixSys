@@ -14,5 +14,10 @@
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
     '';
+    shellAliases = {
+      "update" ="sudo nixos-rebuild switch";
+      "bupdate"="sudo nixos-rebuild boot";
+      "ls"="eza --icons -1 --group-directories-first --git";
+    };
   };
 }
