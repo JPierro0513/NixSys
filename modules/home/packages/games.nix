@@ -14,5 +14,6 @@
     freedroidrpg
     nzportable
     forge-mtg
+    cockatrice
   ];
 }

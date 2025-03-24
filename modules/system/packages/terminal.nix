@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     lazygit
     htop
@@ -15,5 +19,6 @@
     viu
     imagemagick
     yazi
+    inputs.nsearch.packages.${pkgs.system}.default
   ];
 }

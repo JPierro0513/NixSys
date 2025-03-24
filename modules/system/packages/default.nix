@@ -27,7 +27,7 @@
 
     zed-editor
 
-    power-power-profiles-daemon
+    power-profiles-daemon
     gammastep
 
     esbuild
@@ -51,7 +51,6 @@
     gamemode.enable = true;
     steam = {
       enable = true;
-      enableSteamRuntime = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };

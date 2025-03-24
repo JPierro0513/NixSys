@@ -26,7 +26,7 @@
 
   programs.walker = {
     enable = true;
-    runAsService = true;
+    # runAsService = true;
     config = {
       websearch.prefix = "?";
       switcher.prefix = "/";

@@ -5,11 +5,23 @@
     teams-for-linux
     inputs.zen-browser.packages.${pkgs.system}.twilight
     gnome-calendar
-    adobe-reader
+    zathura
     gimp
-    ristretto
+    xfce.ristretto
     obsidian
     zed-editor
     neovide
   ];
+
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      font-size = 16;
+      window-padding-x = 5;
+      window-padding-y = 5;
+      cursor-style = "bar";
+      cursor-style-blink = true;
+      mouse-hide-while-typing = true;
+    };
+  };
 }

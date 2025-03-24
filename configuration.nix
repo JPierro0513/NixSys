@@ -3,10 +3,15 @@
   lib,
   pkgs,
   modulesPath,
+  inputs,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+
+    inputs.home-manager.nixosModules.home-manager
+    inputs.impermanence.nixosModules.impermanence
+    inputs.walker.nixosModules.walker
 
     ./modules/system/filesystem.nix
     ./modules/system/persist.nix
@@ -23,10 +28,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.tmp.cleanOnBoot = true;
-  zramSwap = {
-    enable = true;
-    swapSize = 1024;
-  };
+  zramSwap.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -40,7 +42,11 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  services.xserver.xkb.layout = "us";
+  services.xserver.xkb = {
+    layout = "us";
+    model = "pc104";
+    variant = "intl";
+  };
   console = {
     font = "Lat2-Terminus16";
     keyMap = lib.mkDefault "us";

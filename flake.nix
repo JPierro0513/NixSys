@@ -23,6 +23,11 @@
     ags.inputs.nixpkgs.follows = "nixpkgs";
     astal.url = "github:aylur/astal";
     astal.inputs.nixpkgs.follows = "nixpkgs";
+
+    nsearch = {
+      url = "github:niksingh710/nsearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs @ {
     self,
@@ -30,9 +35,6 @@
     home-manager,
     impermanence,
     neovim-nightly-overlay,
-    ags,
-    astal,
-    walker,
     ...
   }: let
     system = "x86_64-linux";
@@ -44,20 +46,19 @@
       ];
     };
   in {
-    pkgs = pkgs;
-
     formatter = pkgs.alejandra;
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      inherit pkgs;
       specialArgs = {inherit self inputs;};
       modules = [
         {
           nix = {
+            extraOptions = ''download-buffer-size = 500000000'';
             settings = {
               auto-optimise-store = true;
               extraOptions = [
                 "experimental-features = nix-command flakes"
-                "download-buffer-size = 500000000"
               ];
               substituters = [
                 "https://hyprland.cachix.org"
@@ -74,10 +75,6 @@
             };
           };
         }
-
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModules.impermanence
-        walker.nixosModules.walker
 
         ./configuration.nix
         ./home.nix
