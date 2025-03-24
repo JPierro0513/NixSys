@@ -15,6 +15,9 @@
     obsidian
 
     qt6ct
+
+    sticky
+    sticky-notes
   ];
 
   programs.ghostty = {

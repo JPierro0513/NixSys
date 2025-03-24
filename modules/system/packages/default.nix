@@ -18,9 +18,9 @@
       SDL
       SDL2
       ncurses
-      # zlib
-      # zstd
-      # wayland
+      zlib
+      zstd
+      wayland
       libglvnd
       alsa-lib
       libxkbcommon
