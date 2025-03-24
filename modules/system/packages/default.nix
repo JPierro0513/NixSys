@@ -21,15 +21,15 @@
       # zlib
       # zstd
       # wayland
-      # libglvnd
-      # alsa-lib
-      # libxkbcommon
-      # xorg.libxcb
-      # vulkan-loader
-      # # required by livekit:
-      # libGL
-      # xorg.libX11
-      # xorg.libXext
+      libglvnd
+      alsa-lib
+      libxkbcommon
+      xorg.libxcb
+      vulkan-loader
+      # required by livekit:
+      libGL
+      xorg.libX11
+      xorg.libXext
     ];
   };
 
