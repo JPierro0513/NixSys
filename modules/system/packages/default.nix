@@ -4,6 +4,7 @@
     ./thunar.nix
     ./langs.nix
     ./terminal.nix
+    ./fish.nix
   ];
 
   programs.appimage = {
@@ -11,10 +12,29 @@
     binfmt = true;
   };
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      SDL
+      SDL2
+      ncurses
+      alsa-lib
+      libxkbcommon
+      wayland
+      libvulkan
+      xorg.libxcb
+      # required by livekit:
+      libGL
+      xorg.libX11
+      xorg.libXext
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     wget
     curl
     git
+    github-cli
 
     unzip
     kdePackages.ark
@@ -25,12 +45,14 @@
     kdePackages.kpmcore
     kdePackages.partitionmanager
 
-    zed-editor
+    # zed-editor
 
     power-profiles-daemon
     gammastep
 
     esbuild
+
+    sqlite
   ];
 
   programs = {

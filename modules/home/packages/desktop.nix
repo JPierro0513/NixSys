@@ -13,8 +13,8 @@
     gimp
     xfce.ristretto
     obsidian
-    zed-editor
-    neovide
+
+    qt6ct
   ];
 
   programs.ghostty = {

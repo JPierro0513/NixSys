@@ -8,7 +8,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # impermanence.url = "github:nix-community/impermanence";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +32,6 @@
     self,
     nixpkgs,
     home-manager,
-    # impermanence,
     neovim-nightly-overlay,
     ...
   }: let

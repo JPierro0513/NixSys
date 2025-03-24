@@ -9,12 +9,10 @@
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.orchis-theme;
-      name = "Orchis-black";
+      package = pkgs.nordic;
+      name = "Nordic-darker";
     };
     iconTheme = {
-      # package = pkgs.papirus-icon-theme;
-      # name = "Papirus";
       package = pkgs.numix-icon-theme;
       name = "Numix";
     };

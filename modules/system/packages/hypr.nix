@@ -14,22 +14,21 @@
     grimblast
     brightnessctl
     playerctl
+
+    gtk3
+    gtk4
+    gtk4-layer-shell
+    amdvlk
+
+    inputs.walker.packages.${pkgs.system}.default
   ];
 
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-    withUWSM = true;
+    # withUWSM = true;
     xwayland.enable = true;
   };
-
-  programs.walker = {
-    enable = true;
-    # runAsService = true;
-    config = {
-      websearch.prefix = "?";
-      switcher.prefix = "/";
-    };
-  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
