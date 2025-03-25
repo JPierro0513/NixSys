@@ -21,11 +21,17 @@
       };
 
       programs.home-manager.enable = true;
-      # programs.git = {
-      #   enable = true;
-      #   userName = "JPierro0513";
-      #   userEmail = "jmpierro0513@gmail.com";
-      # };
+      programs.git = {
+        enable = true;
+        userName = "JPierro0513";
+        userEmail = "jmpierro0513@gmail.com";
+      };
+      programs.gh = {
+        enable = true;
+        gitCredentialHelper = {
+          enable = true;
+        };
+      };
 
       # xdg.mimeApps = {
       #   enable = true;
