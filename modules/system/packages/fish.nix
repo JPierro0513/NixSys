@@ -28,6 +28,10 @@
       set hydro_color_prompt green
       set hydro_color_duration yellow
       set hydro_color_pwd blue
+
+
+      thefuck --alias | source
+      zoxide init fish --cmd cd | source
     '';
     shellAliases = {
       "update" = "sudo nixos-rebuild switch";

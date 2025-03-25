@@ -9,10 +9,10 @@
     gjs
     nodejs
     python3
-    python3Packages.pip
+    # python3Packages.pip
     python3Packages.pynvim
     python3Packages.pygobject3
-    python3Packages.psutil
+    # python3Packages.psutil
     temurin-bin
     go
     cargo
