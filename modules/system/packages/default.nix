@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./thunar.nix
     ./fish.nix
@@ -55,6 +56,28 @@
     yazi
     superfile
     inputs.nsearch.packages.${pkgs.system}.default
+
+    zed-editor
+    # (cargo-about.overrideAttrs (drv: rec {
+    #   name = "cargo-about";
+    #   version = "0.6.6";
+    #
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "EmbarkStudios";
+    #     repo = "cargo-about";
+    #     rev = version;
+    #     sha256 = "sha256-6jza0IHdX7vyjZt1lknoVhlu7RONF5SnTdn7EDsj2oo=";
+    #   };
+    #
+    #   # useFetchCargoVendor = true;
+    #   # cargoHash = "";
+    #
+    #   cargoDeps = drv.cargoDeps.overrideAttrs (lib.const {
+    #     name = "${name}";
+    #     inherit src;
+    #     outputHash = "";
+    #   });
+    # }))
   ];
 
   programs.neovim = {
