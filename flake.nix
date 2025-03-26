@@ -40,44 +40,61 @@
   }: let
     inherit (self) outputs;
 
-    systems = [ "x86_64-linux" ];
-    # pkgs = import nixpkgs {
-    #   inherit system;
-    #   config = {allowUnfree = true;};
-    #   overlays = [
-    #     neovim-nightly-overlay.overlays.default
-    #     (final: prev: {
-    #       zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
-    #         postPatch =
-    #           # Dynamically link WebRTC instead of static
-    #           ''
-    #             substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
-    #             --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
-    #           ''
-    #           # nixpkgs ships cargo-about 0.7, which is a seamless upgrade from 0.6
-    #           + ''
-    #             substituteInPlace script/generate-licenses \
-    #             --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
-    #           '';
-    #       });
-    #     })
-    #   ];
-    # };
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {allowUnfree = true;};
+      overlays = [
+        inputs.neovim-nightly-overlay.overlays.default
+        (final: prev: {
+          zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
+            postPatch =
+              # Dynamically link WebRTC instead of static
+              ''
+                substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
+                --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
+              ''
+              # nixpkgs ships cargo-about 0.7, which is a seamless upgrade from 0.6
+              + ''
+                substituteInPlace script/generate-licenses \
+                --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
+              '';
+          });
+        })
+      ];
+    };
+    # forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    formatter = pkgs.alejandra;
 
-    packages = forAllSystems (system: import ./packages nixpkgs.legacyPackages.${system});
+    # packages = forAllSystems (system: import ./packages nixpkgs.legacyPackages.${system});
 
-    overlays = forAllSystems (system: import ./overlays {inherit inputs;});
+    # overlays = forAllSystems (system: import ./overlays {inherit inputs;});
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
       modules = [
         ./settings.nix
         ./configuration.nix
-        ./home.nix
+        inputs.home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs outputs;};
+            backupFileExtension = "bak";
+            users.jpierro = import ./home.nix;
+          };
+        }
       ];
     };
+
+    # homeConfigurations.jpierro = inputs.home-manager.lib.homeManagerConfiguration {
+    #   pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #   extraSpecialArgs = { inherit inputs outputs;};
+    #   backupFileExtension = "bak";
+    #   modules = [ ./home.nix ];
+    # };
   };
 }

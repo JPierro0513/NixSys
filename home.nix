@@ -1,22 +1,21 @@
-{inputs, outputs, ...}: {
-  home-manager = {
-    # useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "bak";
-    extraSpecialArgs = {inherit inputs outputs;};
-    users.jpierro = {
-      imports = [
+{
+  inputs,
+  outputs,
+  ...
+}:
+{
+  imports = [
         ./modules/home/theming.nix
         ./modules/home/packages
       ];
 
-      nixpkgs.overlays = [
-        # Add overlays your own flake exports (from overlays and pkgs dir):
-        outputs.overlays.additions
-        outputs.overlays.modifications
-        outputs.overlays.unstable-packages
-      ];
-      nixpkgs.config.allowUnfree = true;
+      # nixpkgs.overlays = [
+      #   # Add overlays your own flake exports (from overlays and pkgs dir):
+      #   outputs.overlays.additions
+      #   outputs.overlays.modifications
+      #   outputs.overlays.unstable-packages
+      # ];
+      # nixpkgs.config.allowUnfree = true;
 
       home = {
         stateVersion = "25.05";
@@ -37,6 +36,17 @@
           enable = true;
         };
       };
-    };
-  };
 }
+
+
+# {inputs, outputs, ...}: {
+#   home-manager = {
+#     # useGlobalPkgs = true;
+#     useUserPackages = true;
+#     backupFileExtension = "bak";
+#     extraSpecialArgs = {inherit inputs outputs;};
+#     users.jpierro = {
+#
+#     };
+#   };
+# }

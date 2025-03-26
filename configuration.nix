@@ -10,9 +10,6 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
 
-    inputs.home-manager.nixosModules.home-manager
-    # inputs.walker.nixosModules.walker
-
     ./modules/system/filesystem.nix
     ./modules/system/fonts.nix
     ./modules/system/services
