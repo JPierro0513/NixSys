@@ -1,6 +1,6 @@
 {
   pkgs,
-  swayfx,
+  inputs,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -18,7 +18,7 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-    package = swayfx.packages.${pkgs.system}.default;
+    package = inputs.swayfx.packages.${pkgs.system}.default;
   };
 
   programs.light.enable = true;

@@ -20,7 +20,7 @@
     gtk4-layer-shell
     amdvlk
 
-    inputs.walker.packages.${pkgs.system}.default
+    # inputs.walker.packages.${pkgs.system}.default
   ];
 
   programs.hyprland = {

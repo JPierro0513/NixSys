@@ -1,13 +1,13 @@
 {
   pkgs,
-  nsearch,
+  inputs,
   ...
 }: {
   imports = [
     ./thunar.nix
     ./fish.nix
     ./hypr.nix
-    ./swayfx.nix
+    # ./swayfx.nix
   ];
 
   programs.appimage = {
@@ -31,7 +31,7 @@
     kdePackages.kpmcore
     kdePackages.partitionmanager
 
-    qtdeclarative
+    qt6.qtdeclarative
     qt6ct
 
     htop
@@ -48,7 +48,7 @@
     imagemagick
     yazi
     superfile
-    nsearch.packages.${pkgs.system}.default
+    inputs.nsearch.packages.${pkgs.system}.default
   ];
 
   programs.neovim = {

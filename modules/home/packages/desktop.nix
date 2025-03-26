@@ -1,9 +1,8 @@
 {
   pkgs,
-  zen-browser,
+  inputs,
   ...
 }: {
-
   home.packages = with pkgs; [
     vesktop
     onlyoffice-bin
@@ -14,6 +13,6 @@
 
     sticky-notes
 
-    zen-browser.packages.${pkgs.system}.twilight
+    inputs.zen-browser.packages.${pkgs.system}.twilight
   ];
 }

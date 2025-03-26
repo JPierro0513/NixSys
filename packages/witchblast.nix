@@ -1,15 +1,10 @@
-{
-  pkgs,
-  stdenv,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   pname = "witchblast";
   version = "0.7.5";
   src = pkgs.fetchFromGithub {
     owner = "Cirrus-Minor";
     repo = "witchblast";
-    sha256 = "";
+    sha256 = "XWruIdbxIns2MZoKWCl3Yfd9ns4AECAQRsl0hMZgV+I=";
   };
   buildInputs = with pkgs; [
     cmake

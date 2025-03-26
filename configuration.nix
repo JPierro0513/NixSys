@@ -12,10 +12,10 @@
     inputs.home-manager.nixosModules.home-manager
     # inputs.walker.nixosModules.walker
 
-    ./modules/filesystem.nix
-    # ./modules/system/fonts.nix
-    # ./modules/system/services
-    # ./modules/system/packages
+    ./modules/system/filesystem.nix
+    ./modules/system/fonts.nix
+    ./modules/system/services
+    ./modules/system/packages
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -54,7 +54,7 @@
 
   services.xserver.xkb = {
     layout = "us";
-    variant = "";
+    variant = "qwerty";
   };
   console = {
     # font = "Lat2-Terminus16";
@@ -66,9 +66,12 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd amdvlk];
+      extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd];
     };
-    amdgpu.amdvlk.enable = true;
+    amdgpu.amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
