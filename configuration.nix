@@ -12,7 +12,7 @@
     inputs.home-manager.nixosModules.home-manager
     # inputs.walker.nixosModules.walker
 
-    ./modules/system/filesystem.nix
+    ./modules/filesystem.nix
     # ./modules/system/fonts.nix
     # ./modules/system/services
     # ./modules/system/packages
