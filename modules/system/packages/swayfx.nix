@@ -1,5 +1,4 @@
-{ pkgs, ...}:
-let
+{pkgs, ...}: let
   tools = import ./tools.nix;
 in {
   xdg.portal = {
@@ -10,8 +9,16 @@ in {
   };
 
   environment.systemPackages =
-    [ pkgs.pcmanfm-qt ]
-    ++ tools.swayTools
+    with pkgs; [
+      pcmanfm-qt
+      grimblast
+      wl-clipboard
+      swaynotificationcenter
+      brightnessctl
+      playerctl
+      rofi-wayland
+    ]
+    # ++ tools.swayTools
     # ++ tools.configTools
     # ++ tools.guiFramework
     # ++ tools.desktopThemes
@@ -44,8 +51,6 @@ in {
   security.polkit.enable = true;
   programs.light.enable = true;
 }
-
-
 # {
 #   pkgs,
 #   inputs,
@@ -89,3 +94,4 @@ in {
 #     }
 #   ];
 # }
+
