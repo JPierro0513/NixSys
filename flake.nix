@@ -50,11 +50,11 @@
   in {
     formatter = pkgs.alejandra;
 
-    packages = import ./packages nixpkgs.legacyPackages.${system};
-    # packages.default = pkgs: {
-    #   # witchblast = ./packages/witchblast.nix;
-    #   witchblast = pkgs.callPackage ./witchblast.nix {};
-    # };
+    # packages = import ./packages nixpkgs.legacyPackages.${system};
+    packages.default = pkgs: {
+      # witchblast = ./packages/witchblast.nix;
+      witchblast = pkgs.callPackage ./witchblast.nix {};
+    };
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit pkgs;

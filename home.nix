@@ -22,6 +22,7 @@
         userName = "JPierro0513";
         userEmail = "jmpierro0513@gmail.com";
       };
+
       programs.gh = {
         enable = true;
         gitCredentialHelper = {
