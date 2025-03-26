@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+
+  home.packages = with pkgs; [ bibata-cursors numix-icon-theme ];
+
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -10,6 +13,7 @@
   dconf = {
     enable = true;
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    settings."org/gnome/desktop/interface".icon-theme = "numix";
   };
 
   gtk.iconTheme = {

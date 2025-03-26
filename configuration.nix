@@ -20,7 +20,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "rtsx_pci_sdmmc"];
-  boot.initrd.kernelModules = ["amdgpu"];
+  boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
   boot.loader.systemd-boot.enable = true;
