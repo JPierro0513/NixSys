@@ -29,9 +29,9 @@
         echo -en (set_color brblack)"["(date "+%I:%M")"] "(set_color $color)"❱ "(set_color normal)
       end
 
-      function transient_rprompt_func
-        echo -n -s (set_color purple) "$nix_shell_info"
-      end
+      # function transient_rprompt_func
+      #   echo -n -s (set_color purple) "$nix_shell_info"
+      # end
 
       function pythonEnv --description 'start a nix-shell with the given python packages' --argument pythonVersion
         if set -q argv[2]
@@ -60,7 +60,6 @@
       "ls" = "eza --icons -1 --group-directories-first --git";
       "lt" = "ls --tree";
       "cat" = "bat";
-      "zed" = "steam-run zed";
     };
   };
 }

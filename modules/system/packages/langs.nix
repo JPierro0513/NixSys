@@ -7,6 +7,7 @@
     lua
     lua-language-server
     hyprls
+    cargo
     nil
     nixd
     alejandra
