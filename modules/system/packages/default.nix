@@ -8,6 +8,7 @@
     ./fish.nix
     ./hypr.nix
     ./swayfx.nix
+    ./langs.nix
   ];
 
   programs.appimage = {
@@ -15,7 +16,12 @@
     binfmt = true;
   };
 
-  programs.nix-ld.enable = true;
+  # programs.nix-ld = {
+  #   enable = true;
+  #   # libraries = with pkgs; [
+  #   #   libpulseaudio
+  #   # ];
+  # };
 
   environment.systemPackages = with pkgs; [
     wget

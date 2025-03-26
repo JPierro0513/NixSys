@@ -43,7 +43,6 @@ in {
         export QT_IM_MODULE=fcitx
         export GTK_IM_MODULE=fcitx
         export _JAVA_AWT_WM_NONREPARENTING=1
-        exec gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
       '';
     };
   };

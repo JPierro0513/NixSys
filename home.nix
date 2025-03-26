@@ -6,7 +6,7 @@
     extraSpecialArgs = {inherit inputs;};
     users.jpierro = {
       imports = [
-        # ./modules/home/theming.nix
+        ./modules/home/theming.nix
         ./modules/home/packages
       ];
 
