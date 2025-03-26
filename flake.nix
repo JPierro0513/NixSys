@@ -36,39 +36,40 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    neovim-nightly-overlay,
     ...
   }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {allowUnfree = true;};
-      overlays = [
-        neovim-nightly-overlay.overlays.default
-        (final: prev: {
-          zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
-            postPatch =
-              # Dynamically link WebRTC instead of static
-              ''
-                substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
-                --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
-              ''
-              # nixpkgs ships cargo-about 0.7, which is a seamless upgrade from 0.6
-              + ''
-                substituteInPlace script/generate-licenses \
-                --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
-              '';
-          });
-        })
-      ];
-    };
+    systems = [ "x86_64-linux" ];
+    # pkgs = import nixpkgs {
+    #   inherit system;
+    #   config = {allowUnfree = true;};
+    #   overlays = [
+    #     neovim-nightly-overlay.overlays.default
+    #     (final: prev: {
+    #       zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
+    #         postPatch =
+    #           # Dynamically link WebRTC instead of static
+    #           ''
+    #             substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
+    #             --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
+    #           ''
+    #           # nixpkgs ships cargo-about 0.7, which is a seamless upgrade from 0.6
+    #           + ''
+    #             substituteInPlace script/generate-licenses \
+    #             --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
+    #           '';
+    #       });
+    #     })
+    #   ];
+    # };
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    formatter = pkgs.alejandra;
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    packages = import ./packages nixpkgs.legacyPackages.${system};
+    packages = forAllSystems (system: import ./packages nixpkgs.legacyPackages.${system});
+
+    overlays = forAllSystems (system: import ./overlays {inherit inputs; });
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit pkgs;
       specialArgs = {inherit self inputs;};
       modules = [
         ./settings.nix
