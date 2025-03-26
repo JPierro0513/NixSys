@@ -7,7 +7,7 @@
     ./thunar.nix
     ./fish.nix
     ./hypr.nix
-    # ./swayfx.nix
+    ./swayfx.nix
   ];
 
   programs.appimage = {
