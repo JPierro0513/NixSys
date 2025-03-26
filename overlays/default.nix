@@ -26,6 +26,4 @@
       config.allowUnfree = true;
     };
   };
-
-  import = inputs.neovim-nightly-overlay.overlays.default;
 }

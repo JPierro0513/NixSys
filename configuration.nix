@@ -4,6 +4,7 @@
   pkgs,
   modulesPath,
   inputs,
+  outputs,
   ...
 }: {
   imports = [
@@ -27,10 +28,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  # nixpkgs.config.allowUnfree = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  nixpkgs = {
+    overlays = [
+      # outputs.overlays.additions
+      # outputs.overlays.modifications
+      # outputs.overlays.unstable-packages
+
+      inputs.neovim-nightly-overlay.overlays.default
+    ];
+    config.allowUnfree = true;
+  };
 
   networking.hostName = "nixos";
   networking.useDHCP = lib.mkDefault true;

@@ -38,6 +38,8 @@
     nixpkgs,
     ...
   }: let
+    inherit (self) outputs;
+
     systems = [ "x86_64-linux" ];
     # pkgs = import nixpkgs {
     #   inherit system;
@@ -67,10 +69,10 @@
 
     packages = forAllSystems (system: import ./packages nixpkgs.legacyPackages.${system});
 
-    overlays = forAllSystems (system: import ./overlays {inherit inputs; });
+    overlays = forAllSystems (system: import ./overlays {inherit inputs;});
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit self inputs;};
+      specialArgs = {inherit inputs outputs;};
       modules = [
         ./settings.nix
         ./configuration.nix
