@@ -66,9 +66,10 @@ exec swayidle -w \
     # Start your launcher
     bindsym $mod+space exec $menu
 
+    # Some apps
     bindsym $mod+f exec zen-twilight
-
-    bindsym $mod+shift+c exec zed --new
+    bindsym $mod+e exec thunar
+    bindsym $mod+shift+c exec zeditor --new
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -145,7 +146,7 @@ exec swayidle -w \
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+ctrl+s layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+shift+f fullscreen
@@ -205,9 +206,10 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
     # Special key to take a screenshot with grim
     bindsym Print exec grimblast save screen
-
+    bindsym $mod+shift+s exec grimblast save area
 #
 # Status Bar:
 #

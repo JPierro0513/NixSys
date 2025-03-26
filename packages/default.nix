@@ -1,3 +1,3 @@
 pkgs: {
-  witchblast = pkgs.callPackage ./witchblast.nix {};
+  thundery = pkgs.callPackage ./thundery.nix {};
 }

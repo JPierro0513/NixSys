@@ -63,7 +63,7 @@ load('mason-lspconfig', {
     lazy = true,
     opts = {
         ensure_installed = {
-            'bashls', 'lua_ls', 'nil_ls',
+            'bashls', 'lua_ls',
         },
         handlers = {
 
