@@ -10,12 +10,12 @@
     (modulesPath + "/installer/scan/not-detected.nix")
 
     inputs.home-manager.nixosModules.home-manager
-    # inputs.walker.nixosModules.walker
+    inputs.walker.nixosModules.walker
 
     ./modules/system/filesystem.nix
-    # ./modules/system/fonts.nix
-    # ./modules/system/services
-    # ./modules/system/packages
+    ./modules/system/fonts.nix
+    ./modules/system/services
+    ./modules/system/packages
   ];
 
   # Use the systemd-boot EFI boot loader.

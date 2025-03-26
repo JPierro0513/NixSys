@@ -1,13 +1,18 @@
-{inputs, ...}: {
+{
+  inputs,
+  outputs,
+  home-manager,
+  ...
+}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "bak";
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {inherit inputs outputs;};
     users.jpierro = {
       imports = [
-        # ./modules/home/theming.nix
         # ./modules/home/packages
+        # ./modules/home/theming.nix
       ];
 
       home = {
@@ -15,8 +20,8 @@
         username = "jpierro";
         homeDirectory = "/home/jpierro";
       };
-
       programs.home-manager.enable = true;
+
       programs.git = {
         enable = true;
         userName = "JPierro0513";
@@ -28,17 +33,6 @@
           enable = true;
         };
       };
-
-      # xdg.mimeApps = {
-      #   enable = true;
-      #   defaultApplications = {
-      #     "text/html" = "zen-twilight.desktop";
-      #     "x-scheme-handler/http" = "zen-twilight.desktop";
-      #     "x-scheme-handler/https" = "zen-twilight.desktop";
-      #     "x-scheme-handler/about" = "zen-twilight.desktop";
-      #     "x-scheme-handler/unknown" = "zen-twilight.desktop";
-      #   };
-      # };
     };
   };
 }

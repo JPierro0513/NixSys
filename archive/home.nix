@@ -6,8 +6,12 @@
     extraSpecialArgs = {inherit inputs;};
     users.jpierro = {
       imports = [
-        # ./modules/home/theming.nix
-        # ./modules/home/packages
+        # inputs.impermanence.homeManagerModules.impermanence
+        # inputs.ags.homeManagerModules.ags
+
+        # ./modules/home/persist.nix
+        ./modules/home/theming.nix
+        ./modules/home/packages
       ];
 
       home = {
