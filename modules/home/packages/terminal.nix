@@ -4,5 +4,6 @@
     fortune
     pokemonsay
     tmux
+    thundery
   ];
 }

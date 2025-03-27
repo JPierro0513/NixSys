@@ -3,15 +3,17 @@
   lib,
   pkgs,
   modulesPath,
+  inputs,
+  outputs,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
 
-    ./modules/system/filesystem.nix
-    ./modules/system/fonts.nix
-    ./modules/system/services
-    ./modules/system/packages
+    ./system/filesystem.nix
+    ./system/fonts.nix
+    ./system/services
+    ./system/packages
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -25,6 +27,16 @@
   zramSwap.enable = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      inputs.neovim-nightly-overlay.overlays.default
+
+      outputs.overlays.additions
+      outputs.overlays.modifications
+    ];
+  };
 
   networking.hostName = "nixos";
   networking.useDHCP = lib.mkDefault true;

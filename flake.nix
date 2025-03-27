@@ -39,25 +39,26 @@
     inherit (self) outputs;
 
     system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {allowUnfree = true;};
-      # overlays = import ./overlays {inherit inputs;};
-      overlays = [
-        inputs.neovim-nightly-overlay.overlays.default
-        outputs.additions
-        outputs.modifications
-      ];
-    };
+    pkgs = nixpkgs.legacyPackages.${system};
+    # pkgs = import nixpkgs {
+    #   inherit system;
+    #   config = {allowUnfree = true;};
+    #   # overlays = import ./overlays {inherit inputs;};
+    #   overlays = [
+    #     inputs.neovim-nightly-overlay.overlays.default
+    #     outputs.overlays.additions
+    #     outputs.overlays.modifications
+    #   ];
+    # };
   in {
     formatter = pkgs.alejandra;
 
     packages.${system} = import ./pkgs nixpkgs.legacyPackages.${system};
 
-    overlays.${system} = import ./overlays {inherit inputs;};
+    overlays = import ./overlays {inherit inputs;};
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit pkgs;
+      # inherit pkgs;
       specialArgs = {inherit inputs outputs;};
       modules = [
         inputs.home-manager.nixosModules.home-manager

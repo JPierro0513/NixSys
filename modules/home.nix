@@ -4,14 +4,14 @@
   ...
 }: {
   home-manager = {
-    useGlobalPkgs = true;
+    # useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "bak";
     extraSpecialArgs = {inherit inputs outputs;};
     users.jpierro = {
       imports = [
-        ./modules/home/theming.nix
-        ./modules/home/packages
+        ./home/theming.nix
+        ./home/packages
       ];
 
       home = {
@@ -21,6 +21,16 @@
       };
 
       programs.home-manager.enable = true;
+
+      nixpkgs = {
+        config.allowUnfree = true;
+        overlays = [
+          inputs.neovim-nightly-overlay.overlays.default
+
+          outputs.overlays.additions
+          outputs.overlays.modifications
+        ];
+      };
 
       # programs.git = {
       #   enable = true;

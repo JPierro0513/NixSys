@@ -5,14 +5,15 @@
 
   modifications = final: prev: {
     zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
-      postPatch = ''
-        substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
-        --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
-      ''
-    + ''
-        substituteInPlace script/generate-licenses \
-        --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
-      '';
+      postPatch =
+        ''
+          substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
+          --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
+        ''
+        + ''
+          substituteInPlace script/generate-licenses \
+          --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
+        '';
     });
   };
 
@@ -24,8 +25,6 @@
   #   };
   # };
 }
-
-
 # {inputs}: let
 #   additions = final: _prev: import ../pkgs final.pkgs;
 #
@@ -62,3 +61,4 @@
 #   #   });
 #   # })
 # ]
+
