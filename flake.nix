@@ -19,22 +19,17 @@
 
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
-    # walker.url = "github:abenz1267/walker";
-
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # ags.url = "github:aylur/ags";
-    # ags.inputs.nixpkgs.follows = "nixpkgs";
-    # astal.url = "github:aylur/astal";
-    # astal.inputs.nixpkgs.follows = "nixpkgs";
-
     nsearch = {
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    better-control.url = "github:Rishabh5321/better-control-flake";
   };
   outputs = inputs @ {
     self,
@@ -47,27 +42,9 @@
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
-      overlays = [
-        inputs.neovim-nightly-overlay.overlays.default
-        (final: prev: {
-          zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
-            postPatch =
-              ''
-                substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
-                --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
-              ''
-              # nixpkgs ships cargo-about 0.7.1 now, which is a seamless upgrade from 0.6
-              + ''
-                substituteInPlace script/generate-licenses \
-                --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
-              '';
-          });
-        })
-      ];
+      overlays = import ./overlays {inherit inputs;};
     };
-    # forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     formatter = pkgs.alejandra;
 
     # packages = forAllSystems (system: import ./packages nixpkgs.legacyPackages.${system});
