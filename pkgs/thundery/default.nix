@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage rec {
     owner = "loefey";
     repo = "thundery";
     rev = "${version}";
-    sha255 = "sha256-8VM9o2OqbYlT1kNQXygGQp8O4QPugy+GcmkQhWwUAu0=";
+    sha256 = "sha256-8VM9o2OqbYlT1kNQXygGQp8O4QPugy+GcmkQhWwUAu0=";
   };
 
   useFetchCargoVendor = true;
@@ -21,11 +21,13 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [ pkg-config openssl ];
 
-  meta = with lib; {
-    description = "a weather fetching cli based off rainy";
-    mainProgram = "thundery";
-    homepage = "https://github.com/loefey/thundery";
-    license = licenses.gpl3;
-    # maintainers = with maintainers; [];
-  };
+  PKG_CONFIG_PATH = "${openssl.dev}/lib/pkgconfig";
+
+  # meta = with lib; {
+  #   description = "a weather fetching cli based off rainy";
+  #   mainProgram = "thundery";
+  #   homepage = "https://github.com/loefey/thundery";
+  #   license = licenses.gpl3;
+  #   # maintainers = with maintainers; [];
+  # };
 }
