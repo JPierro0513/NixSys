@@ -42,24 +42,29 @@
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
-      overlays = import ./overlays {inherit inputs;};
+      # overlays = import ./overlays {inherit inputs;};
+      overlays = [
+        inputs.neovim-nightly-overlay.overlays.default
+        outputs.additions
+        outputs.modifications
+      ];
     };
   in {
     formatter = pkgs.alejandra;
 
-    packages.${system} = (import ./pkgs nixpkgs.legacyPackages.${system});
+    packages.${system} = import ./pkgs nixpkgs.legacyPackages.${system};
 
-    # overlays = forAllSystems (system: import ./overlays {inherit inputs;});
+    overlays.${system} = import ./overlays {inherit inputs;};
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit pkgs;
       specialArgs = {inherit inputs outputs;};
       modules = [
-        ./settings.nix
         inputs.home-manager.nixosModules.home-manager
         inputs.nixos-cosmic.nixosModules.default
-        ./configuration.nix
-        ./home.nix
+        ./modules/settings.nix
+        ./modules/configuration.nix
+        ./modules/home.nix
       ];
     };
   };
