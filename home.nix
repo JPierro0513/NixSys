@@ -2,9 +2,14 @@
   inputs,
   outputs,
   ...
-}:
-{
-  imports = [
+}: {
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "bak";
+    extraSpecialArgs = {inherit inputs outputs;};
+    users.jpierro = {
+      imports = [
         ./modules/home/theming.nix
         ./modules/home/packages
       ];
@@ -36,17 +41,6 @@
           enable = true;
         };
       };
+    };
+  };
 }
-
-
-# {inputs, outputs, ...}: {
-#   home-manager = {
-#     # useGlobalPkgs = true;
-#     useUserPackages = true;
-#     backupFileExtension = "bak";
-#     extraSpecialArgs = {inherit inputs outputs;};
-#     users.jpierro = {
-#
-#     };
-#   };
-# }

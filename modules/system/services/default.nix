@@ -2,7 +2,7 @@
   imports = [
     ./audio.nix
     ./bluetooth.nix
-    ./power.nix
+    # ./power.nix
   ];
 
   # Enable CUPS to print documents.

@@ -57,7 +57,13 @@
     inputs.nsearch.packages.${pkgs.system}.default
 
     zed-editor
+
+    # (pkgs.callPackage ./thundery.nix)
   ];
+
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
+  services.flatpak.enable = true;
 
   programs.neovim = {
     enable = true;

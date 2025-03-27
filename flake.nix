@@ -16,6 +16,9 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+
     # walker.url = "github:abenz1267/walker";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -49,12 +52,11 @@
         (final: prev: {
           zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
             postPatch =
-              # Dynamically link WebRTC instead of static
               ''
                 substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
                 --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
               ''
-              # nixpkgs ships cargo-about 0.7, which is a seamless upgrade from 0.6
+              # nixpkgs ships cargo-about 0.7.1 now, which is a seamless upgrade from 0.6
               + ''
                 substituteInPlace script/generate-licenses \
                 --replace-fail 'CARGO_ABOUT_VERSION="0.6"' 'CARGO_ABOUT_VERSION="0.7.1"'
@@ -73,28 +75,15 @@
     # overlays = forAllSystems (system: import ./overlays {inherit inputs;});
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      inherit pkgs;
       specialArgs = {inherit inputs outputs;};
       modules = [
         ./settings.nix
-        ./configuration.nix
         inputs.home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = { inherit inputs outputs;};
-            backupFileExtension = "bak";
-            users.jpierro = import ./home.nix;
-          };
-        }
+        inputs.nixos-cosmic.nixosModules.default
+        ./configuration.nix
+        ./home.nix
       ];
     };
-
-    # homeConfigurations.jpierro = inputs.home-manager.lib.homeManagerConfiguration {
-    #   pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #   extraSpecialArgs = { inherit inputs outputs;};
-    #   backupFileExtension = "bak";
-    #   modules = [ ./home.nix ];
-    # };
   };
 }
