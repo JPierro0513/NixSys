@@ -47,7 +47,7 @@
   in {
     formatter = pkgs.alejandra;
 
-    packages = (import ./pkgs nixpkgs.legacyPackages.${system});
+    packages.${system} = (import ./pkgs nixpkgs.legacyPackages.${system});
 
     # overlays = forAllSystems (system: import ./overlays {inherit inputs;});
 
