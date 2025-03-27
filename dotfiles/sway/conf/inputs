@@ -1,0 +1,7 @@
+### Input configuration
+input "type:TouchPad" {
+  dwt enabled
+  tap enabled
+  natural_scroll enabled
+  middle_emulation enabled
+}
