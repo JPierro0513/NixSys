@@ -1,9 +1,21 @@
-{stdenv, pkgs, rustPlatform}:
+{
+  lib,
+  stdenv,
+  cargo,
+  makeWrapper,
+  pkgs,
+  rustPlatform,
+  fetchFromGitHub,
+}:
+
 rustPlatform.buildRustPackage rec {
   pname = "thundery";
   version = "1.0.1";
 
-  src = pkgs.fetchFromGitHub {
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-wqtv77aAJTRUSs5ZjqMouuzeDW2O7wg0JsLgoKnpJ5U=";
+
+  src = fetchFromGitHub {
     owner = "loefey";
     repo = "thundery";
     rev = "${version}";
@@ -11,7 +23,9 @@ rustPlatform.buildRustPackage rec {
   };
 
   buildInputs = with pkgs; [ pkg-config openssl ];
-  PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+  # PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+
+
 }
 
 # {

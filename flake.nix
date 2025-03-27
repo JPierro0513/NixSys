@@ -47,7 +47,7 @@
   in {
     formatter = pkgs.alejandra;
 
-    packages = import ./packages {inherit pkgs;};
+    # packages = import ./packages {inherit pkgs;};
 
     # overlays = forAllSystems (system: import ./overlays {inherit inputs;});
 
