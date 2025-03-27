@@ -18,7 +18,7 @@ load('mini.hipatterns', {
     },
 })
 
-local colored_fts = { 'cfg', 'css', 'conf', 'lua', 'scss' }
+local colored_fts = { 'cfg', 'css', 'conf', 'lua', 'scss', 'nix' }
 load('uga-rosa/ccc.nvim', {
     opts = {
         highlighter = {

@@ -3,7 +3,6 @@
   rustPlatform,
   pkgs,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "thundery";
   version = "1.0.1";
