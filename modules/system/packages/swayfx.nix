@@ -1,5 +1,6 @@
 {pkgs, ...}: let
-  tools = import ./tools.nix;
+  # tools = import ./tools.nix;
+  waybarConfig = import ./waybar.nix;
 in {
   xdg.portal = {
     wlr.enable = true;
@@ -17,6 +18,7 @@ in {
       brightnessctl
       playerctl
       rofi-wayland
+      waybar
     ]
     # ++ tools.swayTools
     # ++ tools.configTools
@@ -40,8 +42,6 @@ in {
         export QT_SCALE_FACTOR=1
         export QT_AUTO_SCREEN_SCALE_FACTOR=0
         export QT_QPA_PLATFORMTHEME=qt6ct
-        export QT_IM_MODULE=fcitx
-        export GTK_IM_MODULE=fcitx
         export _JAVA_AWT_WM_NONREPARENTING=1
       '';
     };
@@ -49,48 +49,11 @@ in {
   services.gnome.gnome-keyring.enable = true;
   security.polkit.enable = true;
   programs.light.enable = true;
-}
-# {
-#   pkgs,
-#   inputs,
-#   ...
-# }: {
-#   environment.systemPackages = with pkgs; [
-#     grimblast
-#     wl-clipboard
-#     swaynotificationcenter
-#     brightnessctl
-#     playerctl
-#     rofi-wayland
-#   ];
-#
-#   services.gnome.gnome-keyring.enable = true;
-#   security.polkit.enable = true;
-#
-#   programs.sway = {
-#     enable = true;
-#     wrapperFeatures.gtk = true;
-#     package = inputs.swayfx.packages.${pkgs.system}.default;
-#   };
-#
-#   programs.light.enable = true;
-#
-#   # kanshi systemd service
-#   systemd.user.services.kanshi = {
-#     description = "kanshi daemon";
-#     serviceConfig = {
-#       Type = "simple";
-#       ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
-#     };
-#   };
-#
-#   security.pam.loginLimits = [
-#     {
-#       domain = "@users";
-#       item = "rtprio";
-#       type = "-";
-#       value = 1;
-#     }
-#   ];
-# }
 
+  xdg.configFile."waybar/config" = {
+    text = waybarConfig.waybarConfig;
+  };
+  xdg.configFile."waybar/style.css" = {
+    text = waybarConfig.waybarStyle;
+  };
+}
