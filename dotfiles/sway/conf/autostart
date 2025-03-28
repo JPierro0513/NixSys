@@ -6,10 +6,13 @@ exec swayidle -w \
 
 # For GTK3 applications
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 exec nm-applet --indicator
 
 exec wl-paste -t text --watch clipman store
 exec wl-paste -t image --watch clipman store
+
+exec com.vixalien.sticky
+
+exec waybar

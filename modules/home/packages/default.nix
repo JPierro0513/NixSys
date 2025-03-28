@@ -5,5 +5,6 @@
     ./terminal.nix
     ./games.nix
     ./spicetify.nix
+    ./waybar.nix
   ];
 }

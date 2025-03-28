@@ -1,7 +1,6 @@
 {pkgs, ...}:
 #let
 # tools = import ./tools.nix;
-# waybarConfig = import ./waybar.nix;
 #in
 {
   environment.systemPackages =
@@ -45,15 +44,7 @@
   security.polkit.enable = true;
   programs.light.enable = true;
 
-  # xdg.configFile."waybar/config" = {
-  #   text = waybarConfig.waybarConfig;
-  # };
-  # xdg.configFile."waybar/style.css" = {
-  #   text = waybarConfig.waybarStyle;
-  # };
-
   xdg = {
-    enable = true;
     portal = {
       wlr.enable = true;
       extraPortals = [
