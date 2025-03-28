@@ -1,12 +1,22 @@
+default_border pixel 2
+default_floating_border none
+# smart_gaps on
+# hide_edge_borders smart
+gaps inner 15
+gaps outer 0
+gaps bottom 1
+gaps top 1
+
 # Swayfx Config
-corner_radius 5
+corner_radius 12
+smart_corner_radius on
+
+shadows on
+shadow_blur_radius 12
+shadow_color #0000007F
 
 blur enable
 blur_xray off
 blur_passes 2
 blur_radius 2
 
-shadows on
-shadows_on_csd off
-shadow_blur_radius 20
-shadow_color #0000007F

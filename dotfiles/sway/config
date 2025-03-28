@@ -9,10 +9,9 @@ include ./conf/autostart
 
 include ./conf/keybinds
 
-bar {
-}
-
 include ./conf/fx
+
+include ./conf/rules
 
 include /etc/sway/config.d/*
 

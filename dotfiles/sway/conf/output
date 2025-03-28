@@ -1,4 +1,5 @@
 ### Output configuration
+output * render_bit_depth 10
 output * bg ~/wallpapers/hnjt0ebtg3pe1.jpeg fill
 
 set $laptop eDP-1
