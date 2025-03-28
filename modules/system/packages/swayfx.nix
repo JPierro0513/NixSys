@@ -1,14 +1,9 @@
-{pkgs, ...}: let
-  # tools = import ./tools.nix;
-  waybarConfig = import ./waybar.nix;
-in {
-  xdg.portal = {
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-    ];
-  };
-
+{pkgs, ...}:
+#let
+# tools = import ./tools.nix;
+# waybarConfig = import ./waybar.nix;
+#in
+{
   environment.systemPackages =
     with pkgs; [
       pcmanfm-qt
@@ -50,10 +45,20 @@ in {
   security.polkit.enable = true;
   programs.light.enable = true;
 
-  xdg.configFile."waybar/config" = {
-    text = waybarConfig.waybarConfig;
-  };
-  xdg.configFile."waybar/style.css" = {
-    text = waybarConfig.waybarStyle;
+  # xdg.configFile."waybar/config" = {
+  #   text = waybarConfig.waybarConfig;
+  # };
+  # xdg.configFile."waybar/style.css" = {
+  #   text = waybarConfig.waybarStyle;
+  # };
+
+  xdg = {
+    enable = true;
+    portal = {
+      wlr.enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-wlr
+      ];
+    };
   };
 }
