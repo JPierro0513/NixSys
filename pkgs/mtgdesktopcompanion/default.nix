@@ -3,6 +3,7 @@
   jre,
   makeWrapper,
   maven,
+  makeDesktopItem,
 }:
 maven.buildMavenPackage rec {
   pname = "MtgDesktopCompanion";
@@ -34,4 +35,13 @@ maven.buildMavenPackage rec {
       --set JAVA_HOME ${jre} \
       --prefix PATH : ${jre}/bin
   '';
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = "MtgDesktopCompanion";
+      exec = "mtg-desktop-companion.sh";
+      desktopName = "MtgDesktopCompanion";
+      categories = ["Game"];
+    })
+  ];
 }
