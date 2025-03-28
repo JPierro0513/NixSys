@@ -7,10 +7,6 @@
     cataclysm-dda
     brogue-ce
     openttd
-    openrw
-    openjk
-    meritous
-    opendune
     nzportable
     forge-mtg
     cockatrice

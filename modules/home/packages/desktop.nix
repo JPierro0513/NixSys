@@ -16,5 +16,7 @@
     inputs.zen-browser.packages.${pkgs.system}.twilight
 
     inputs.better-control.packages.${pkgs.system}.better-control
+
+    MtgDesktopCompanion
   ];
 }
