@@ -16,12 +16,12 @@
     binfmt = true;
   };
 
-  # programs.nix-ld = {
-  #   enable = true;
-  #   # libraries = with pkgs; [
-  #   #   libpulseaudio
-  #   # ];
-  # };
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      sdl3
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     wget
@@ -57,6 +57,8 @@
     inputs.nsearch.packages.${pkgs.system}.default
 
     zed-editor
+
+    glib
 
     # (pkgs.callPackage ./thundery.nix)
   ];

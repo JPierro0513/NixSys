@@ -3,7 +3,6 @@
   fetchFromGitHub,
   pkg-config,
   openssl,
-  lib,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "thundery";
@@ -22,12 +21,4 @@ rustPlatform.buildRustPackage rec {
   nativeBuildInputs = [pkg-config openssl];
 
   PKG_CONFIG_PATH = "${openssl.dev}/lib/pkgconfig";
-
-  # meta = with lib; {
-  #   description = "a weather fetching cli based off rainy";
-  #   mainProgram = "thundery";
-  #   homepage = "https://github.com/loefey/thundery";
-  #   license = licenses.gpl3;
-  #   # maintainers = with maintainers; [];
-  # };
 }

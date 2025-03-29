@@ -20,6 +20,9 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -28,8 +31,6 @@
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    better-control.url = "github:Rishabh5321/better-control-flake";
   };
   outputs = inputs @ {
     self,
