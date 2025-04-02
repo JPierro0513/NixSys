@@ -1,25 +1,14 @@
-{pkgs, ...}:
-#let
-# tools = import ./tools.nix;
-#in
-{
-  environment.systemPackages =
-    with pkgs; [
-      pcmanfm-qt
-      grimblast
-      wl-clipboard
-      swaynotificationcenter
-      brightnessctl
-      playerctl
-      rofi-wayland
-      waybar
-    ]
-    # ++ tools.swayTools
-    # ++ tools.configTools
-    # ++ tools.guiFramework
-    # ++ tools.desktopThemes
-    # ++ tools.miscTools
-    ;
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    pcmanfm-qt
+    grimblast
+    wl-clipboard
+    swaynotificationcenter
+    brightnessctl
+    playerctl
+    rofi-wayland
+    waybar
+  ];
 
   programs = {
     sway = {

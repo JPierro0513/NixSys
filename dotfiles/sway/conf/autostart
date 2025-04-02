@@ -15,4 +15,4 @@ exec wl-paste -t image --watch clipman store
 
 exec com.vixalien.sticky
 
-exec waybar
+exec 'gh auth setup-git'

@@ -1,17 +1,16 @@
 # Read `man 5 sway` for a complete reference.
 
+include /etc/sway/config.d/*
 include ./conf/variables
-
 include ./conf/inputs
 include ./conf/output
-
 include ./conf/autostart
-
 include ./conf/keybinds
-
 include ./conf/fx
-
 include ./conf/rules
 
-include /etc/sway/config.d/*
+bar {
+    swaybar_command   "waybar"
+    # workspace_buttons yes
+}
 

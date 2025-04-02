@@ -4,6 +4,7 @@
     python3
     python3Packages.pynvim
     nodejs
+    rustup
     lua
     lua-language-server
     hyprls

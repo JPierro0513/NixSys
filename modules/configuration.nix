@@ -3,7 +3,7 @@
   lib,
   pkgs,
   modulesPath,
-  inputs,
+  # inputs,
   outputs,
   ...
 }: {
@@ -31,7 +31,7 @@
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
-      inputs.neovim-nightly-overlay.overlays.default
+      # inputs.neovim-nightly-overlay.overlays.default
 
       outputs.overlays.additions
       outputs.overlays.modifications

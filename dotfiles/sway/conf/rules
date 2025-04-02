@@ -29,8 +29,8 @@ for_window [app_id="mpv"] resize set 960 540
 for_window [app_id="mpv"] border pixel 0
 for_window [app_id="zen-twilight" title="Zen Twilight – Sharing Indicator"] floating enable
 for_window [app_id="zen-twilight" title="Picture-in-Picture"] floating enable
-for_window [app_id="zen-twilight" title="— Zen Twilight"] floating enable
-for_window [app_id="zen-twilight" title="^Zen Twilight"] floating enable
+# for_window [app_id="zen-twilight" title="— Zen Twilight"] floating enable
+# for_window [app_id="zen-twilight" title="^Zen Twilight"] floating enable
 for_window [app_id="galculator"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
