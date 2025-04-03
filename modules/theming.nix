@@ -1,6 +1,4 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [bibata-cursors numix-icon-theme];
-
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;

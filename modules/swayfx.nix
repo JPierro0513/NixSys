@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
-    pcmanfm-qt
     grimblast
     wl-clipboard
     swaynotificationcenter
@@ -13,7 +17,7 @@
   programs = {
     sway = {
       enable = true;
-      package = pkgs.swayfx;
+      package = inputs.swayfx.packages.${system}.swayfx-unwrapped;
       wrapperFeatures.gtk = true;
       extraSessionCommands = ''
         export XDG_SESSION_TYPE=wayland

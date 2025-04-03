@@ -1,16 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    ./thunar.nix
-    ./fish.nix
-    ./hypr.nix
-    ./swayfx.nix
-    ./langs.nix
-  ];
-
+{pkgs, ...}: {
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -28,20 +16,14 @@
     curl
     git
     github-cli
-
     unzip
     kdePackages.ark
-
     sqlite
-
     kdePackages.kpmcore
     kdePackages.partitionmanager
-
-    qt6.qtdeclarative
-    qt6ct
-
-    htop
+    btop
     lazygit
+    yazy
     fastfetch
     fd
     ripgrep
@@ -52,25 +34,10 @@
     thefuck
     viu
     imagemagick
-    yazi
-    superfile
     inputs.nsearch.packages.${pkgs.system}.default
-
     zed-editor
-
     glib
-
-    # (pkgs.callPackage ./thundery.nix)
   ];
-
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
-  services.flatpak.enable = true;
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
 
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
@@ -85,5 +52,25 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+  };
+
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      monaspace
+      roboto
+      rubik
+      source-serif-pro
+      nerd-fonts.hack
+      nerd-fonts.jetbrains-mono
+      font-awesome
+      material-design-icons
+    ];
+    fontconfig.defaultFonts = {
+      monospace = ["Monaspace Radon"];
+      sansSerif = ["Roboto"];
+      serif = ["Rubik"];
+      emoji = ["Noto Color Emoji"];
+    };
   };
 }

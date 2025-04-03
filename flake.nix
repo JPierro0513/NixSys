@@ -1,27 +1,16 @@
 {
-  description = "NixOS configuration for my personal computer";
-
+  description = "Simple NixOS configuration ... hopefully";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     swayfx = {
       url = "github:willpower3309/swayfx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -32,42 +21,49 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs @ {
+
+  outputs = {
     self,
     nixpkgs,
+    home-manager,
     ...
-  }: let
+  } @ inputs: let
     inherit (self) outputs;
-
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-    # pkgs = import nixpkgs {
-    #   inherit system;
-    #   config = {allowUnfree = true;};
-    #   # overlays = import ./overlays {inherit inputs;};
-    #   overlays = [
-    #     inputs.neovim-nightly-overlay.overlays.default
-    #     outputs.overlays.additions
-    #     outputs.overlays.modifications
-    #   ];
-    # };
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+      overlays = [
+        outputs.overlays.additions
+        outputs.overlays.modifications
+      ];
+    };
   in {
     formatter = pkgs.alejandra;
 
-    packages.${system} = import ./pkgs nixpkgs.legacyPackages.${system};
-
     overlays = import ./overlays {inherit inputs;};
 
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      # inherit pkgs;
-      specialArgs = {inherit inputs outputs;};
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        # inputs.nixos-cosmic.nixosModules.default
-        ./modules/settings.nix
-        ./modules/configuration.nix
-        ./modules/home.nix
-      ];
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs system pkgs;};
+        modules = [
+          home-manager.nixosModules.home-manager
+
+          ./hardware-configuration.nix
+          ./configuration.nix
+          ./modules/services.nix
+          ./modules/system.nix
+          ./modules/fish.nix
+          ./modules/swayfx.nix
+          ./modules/thunar.nix
+
+          ./home.nix
+          ./modules/home.nix
+          ./modules/theming.nix
+        ];
+      };
     };
   };
 }
