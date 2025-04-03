@@ -17,7 +17,8 @@
   programs = {
     sway = {
       enable = true;
-      package = inputs.swayfx.packages.${system}.swayfx-unwrapped;
+      # package = inputs.swayfx.packages.${system}.swayfx-unwrapped;
+      package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
       extraSessionCommands = ''
         export XDG_SESSION_TYPE=wayland

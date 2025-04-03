@@ -3,6 +3,8 @@
   lib,
   pkgs,
   inputs,
+  outputs,
+  system,
   ...
 }: {
   nix = let
@@ -14,20 +16,31 @@
       experimental-features = ["nix-command" "flakes"];
       flake-registry = "";
       nix-path = config.nix.nixPath;
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://chaotic-nyx.cachix.org"
+        "https://cosmic.cachix.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+      ];
     };
-    channels.enable = false;
+    channel.enable = false;
     # Opinionated: make flake registry and nix path match flake inputs
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-    substituters = [
-      "https://nix-community.cachix.org"
-      "https://chaotic-nyx.cachix.org"
-      "https://cosmic.cachix.org/"
-    ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+  };
+
+  nixpkgs = {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
     ];
   };
 

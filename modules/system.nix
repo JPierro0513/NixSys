@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -23,7 +27,7 @@
     kdePackages.partitionmanager
     btop
     lazygit
-    yazy
+    yazi
     fastfetch
     fd
     ripgrep

@@ -30,24 +30,24 @@
   } @ inputs: let
     inherit (self) outputs;
     system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-      overlays = [
-        outputs.overlays.additions
-        outputs.overlays.modifications
-      ];
-    };
+    # pkgs = import nixpkgs {
+    #   inherit system;
+    #   config = {
+    #     allowUnfree = true;
+    #   };
+    #   overlays = [
+    #     outputs.overlays.additions
+    #     outputs.overlays.modifications
+    #   ];
+    # };
   in {
-    formatter = pkgs.alejandra;
+    formatter = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     overlays = import ./overlays {inherit inputs;};
 
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs system pkgs;};
+        specialArgs = {inherit inputs outputs system;};
         modules = [
           home-manager.nixosModules.home-manager
 
@@ -60,8 +60,6 @@
           ./modules/thunar.nix
 
           ./home.nix
-          ./modules/home.nix
-          ./modules/theming.nix
         ];
       };
     };
