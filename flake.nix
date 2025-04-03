@@ -63,7 +63,7 @@
       specialArgs = {inherit inputs outputs;};
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        inputs.nixos-cosmic.nixosModules.default
+        # inputs.nixos-cosmic.nixosModules.default
         ./modules/settings.nix
         ./modules/configuration.nix
         ./modules/home.nix
