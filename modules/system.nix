@@ -42,6 +42,7 @@
     imagemagick
     inputs.nsearch.packages.${pkgs.system}.default
     zed-editor
+    meld
     glib
     # Languages
     gnumake
@@ -58,6 +59,7 @@
     nixd
     alejandra
     openjdk21
+    hyprls
   ];
 
   programs.neovim = {

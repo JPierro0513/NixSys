@@ -53,36 +53,10 @@ return {
         event = { 'BufReadPost', 'BufNewFile' },
         config = function()
             require'slimline'.setup({
-                -- style = 'bg',
+                style = 'fg',
+                bold = true,
                 configs = {
                     mode = { verbose = true },
-                    hl = {
-                        normal = 'Comment',
-                        insert = 'Normal',
-                        pending = 'Normal',
-                        visual = 'Normal',
-                        command = 'Normal',
-                    },
-                    path = {
-                        hl = {
-                            primary = 'Label',
-                        },
-                    },
-                    git = {
-                        hl = {
-                            primary = 'Function',
-                        },
-                    },
-                    diagnostics = {
-                        hl = {
-                            primary = 'Statement',
-                        },
-                    },
-                    filetype_lsp = {
-                        hl = {
-                            primary = 'String',
-                        },
-                    },
                 },
                 components = {
                     left = {
@@ -97,10 +71,10 @@ return {
                             local icons = config.configs['path'].icons
 
                             if vim.bo.modified then
-                                file = file..' '..icons.modified
+                                file = file..icons.modified
                             end
                             if vim.bo.readonly then
-                                file = file..' '..icons.read_only
+                                file = file..icons.read_only
                             end
 
                             local path = ''
@@ -111,13 +85,8 @@ return {
                             return highlights.hl_component(
                                 {primary = path, secondary = file},
                                 {
-                                    primary = {
-                                        text = 'Label',
-                                    },
-                                    secondary = {
-                                        text = 'Comment',
-                                        sep = ''
-                                    }
+                                    primary = highlights.hls.components['filetype_lsp'].primary,
+                                    secondary = highlights.hls.components['filetype_lsp'].secondary,
                                 },
                                 ''
                             )
@@ -141,7 +110,7 @@ return {
                             return highlights.hl_component(
                                 { primary = content },
                                 highlights.get_mode_hl(utils.get_mode()),
-                                config.sep
+                                ''
                             )
                         end,
                     }
