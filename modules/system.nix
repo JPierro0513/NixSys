@@ -16,15 +16,17 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Getters
     wget
     curl
     git
     github-cli
+    # Archivers
     unzip
     kdePackages.ark
-    sqlite
     kdePackages.kpmcore
     kdePackages.partitionmanager
+    # Important programs
     btop
     lazygit
     yazi
@@ -41,13 +43,33 @@
     inputs.nsearch.packages.${pkgs.system}.default
     zed-editor
     glib
+    # Languages
+    gnumake
+    clang
+    python3
+    python3Packages.pip
+    python3Packages.pynvim
+    sqlite
+    nodejs
+    rustup
+    lua
+    lua-language-server
+    nil
+    nixd
+    alejandra
+    openjdk21
   ];
 
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;

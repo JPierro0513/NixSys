@@ -10,6 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
+
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -57,6 +61,7 @@
           ./modules/system.nix
           ./modules/fish.nix
           ./modules/swayfx.nix
+          ./modules/hyprland.nix
           ./modules/thunar.nix
 
           ./home.nix

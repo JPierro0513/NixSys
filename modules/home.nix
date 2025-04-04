@@ -80,6 +80,8 @@
     };
   };
 
+  services.mpris-proxy.enable = true;
+
   imports = [inputs.spicetify-nix.homeManagerModules.default];
   programs.spicetify = let
     spicepkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
