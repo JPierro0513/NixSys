@@ -32,8 +32,8 @@
 
   services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
     "monitor.bluez.properties" = {
-      "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag" ];
-      "bluez5.codecs" = [ "aptx_hd" "aptx" "ldac" "sbc" "sbc_xq" "aac" ];
+      "bluez5.roles" = ["a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag"];
+      "bluez5.codecs" = ["aptx_hd" "aptx" "ldac" "sbc" "sbc_xq" "aac"];
       "bluez5.enable-sbc-xq" = true;
       "bluez5.enable-hw-volume" = true;
       "bluez5.hfphsp-backend" = "native";
@@ -53,29 +53,28 @@
     blueman
   ];
 
-  services.upower.enable = true;
-
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
-
-  powerManagement.enable = true;
+  # services.upower.enable = true;
+  # services.auto-cpufreq = {
+  #   enable = true;
+  #   settings = {
+  #     battery = {
+  #       governor = "powersave";
+  #       turbo = "never";
+  #     };
+  #     charger = {
+  #       governor = "performance";
+  #       turbo = "auto";
+  #     };
+  #   };
+  # };
+  #
+  # powerManagement.enable = true;
 
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
   '';
 
-  services.displayManager.cosmic-greeter.enable = true;
+  # services.displayManager.cosmic-greeter.enable = true;
   # services.flatpak.enable = true;
 
   services.ollama = {

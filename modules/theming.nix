@@ -16,14 +16,11 @@
     settings."org/gnome/desktop/interface".gtk-theme = "Juno";
   };
 
-
-# exec-once = dconf write /org/gnome/desktop/interface/gtk-theme "'Juno'"
-# exec-once = dconf write /org/gnome/desktop/interface/icon-theme "'Numix'"
-# exec-once = dconf write /org/gnome/desktop/interface/document-font-name "'Roboto Medium 11'"
-# exec-once = dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 11'"
-# exec-once = dconf write /org/gnome/desktop/interface/monospace-font-name "'Monaspace Radon Medium 11'"
-
-
+  # exec-once = dconf write /org/gnome/desktop/interface/gtk-theme "'Juno'"
+  # exec-once = dconf write /org/gnome/desktop/interface/icon-theme "'Numix'"
+  # exec-once = dconf write /org/gnome/desktop/interface/document-font-name "'Roboto Medium 11'"
+  # exec-once = dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 11'"
+  # exec-once = dconf write /org/gnome/desktop/interface/monospace-font-name "'Monaspace Radon Medium 11'"
 
   gtk = {
     enable = true;
