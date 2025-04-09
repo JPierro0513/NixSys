@@ -17,6 +17,8 @@ MapKey('>', '>gv', 'Shift >', 'v')
 MapKey('gQ', 'mzgggqG`z<cmd>delmarks z<cr>zz', 'Format buffer')
 
 MapKey('<esc>', function()
-    vim.cmd 'noh'
+    vim.cmd 'nohl'
     return '<esc>'
 end, 'Clear hl and escape', { 'n', 'i', 's' }, { expr = true})
+
+MapKey('gQ', 'mzgggqG`z<cmd>delmarks z<cr>zz', 'Format buffer')

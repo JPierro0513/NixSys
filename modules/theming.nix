@@ -13,7 +13,7 @@
     settings."org/gnome/desktop/interface".icon-theme = "Numix";
     settings."org/gnome/desktop/interface".cursor-theme = "Bibata-Modern-Classic";
     settings."org/gnome/desktop/interface".cursor-size = 16;
-    settings."org/gnome/desktop/interface".theme = "Juno";
+    settings."org/gnome/desktop/interface".gtk-theme = "Juno";
   };
 
 

@@ -22,5 +22,7 @@
     brightnessctl
     playerctl
     rofi-wayland
+    cliphist
+    wl-clipboard
   ];
 }

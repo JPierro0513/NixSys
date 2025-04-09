@@ -9,9 +9,9 @@ local topts = {
     "splitbelow",
     "ignorecase",
     "smartcase",
+    "smartindent",
     "incsearch",
     'list',
-
 }
 for _,v in pairs(topts) do vim.o[v] = true end
 
@@ -28,16 +28,14 @@ vim.o.softtabstop = 4
 
 vim.o.inccommand = 'split'
 
-vim.o.listchars = 'tab:󰄾-,trail:·,nbsp:·'
+vim.o.listchars = 'tab:󰄾·,trail:·,nbsp:·'
 
-vim.o.updatetime = 300
-vim.o.timeoutlen = 500
+vim.o.updatetime = 200
+vim.o.timeoutlen = 450
 vim.o.ttimeoutlen = 10
 
 vim.o.laststatus = 3
 vim.o.showmode = false
 
--- vim.o.completeopt = 'menuone,noinsert,noselect,popup,fuzzy'
-
-vim.o.scrolloff = 5
+vim.o.scrolloff = 10
 

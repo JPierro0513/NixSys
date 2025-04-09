@@ -22,13 +22,13 @@
       };
     };
   };
- 
-  # systemd.user.services.mpris-proxy = {
-  #   description = "Mpris proxy";
-  #   after = ["network.target" "sound.target"];
-  #   wantedBy = ["default.target"];
-  #   serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
-  # };
+
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = ["network.target" "sound.target"];
+    wantedBy = ["default.target"];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
 
   services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
     "monitor.bluez.properties" = {
@@ -77,4 +77,8 @@
 
   services.displayManager.cosmic-greeter.enable = true;
   # services.flatpak.enable = true;
+
+  services.ollama = {
+    enable = true;
+  };
 }

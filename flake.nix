@@ -65,6 +65,7 @@
           ./modules/thunar.nix
 
           ./home.nix
+          ./modules/waybar.nix
         ];
       };
     };

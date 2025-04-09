@@ -53,6 +53,7 @@
 
       thefuck --alias | source
       zoxide init fish --cmd cd | source
+
     '';
     shellAliases = {
       "update" = "sudo nixos-rebuild switch";

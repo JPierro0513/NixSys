@@ -22,11 +22,17 @@ local function on_attach(client, bufnr)
     end, 'Next error')
 
     if client:supports_method('textDocument/signatureHelp') then
+        local blink_window = require 'blink.cmp.completion.windows.menu'
+        local blink = require 'blink.cmp'
+
         map('<C-k>', function()
-            -- local care = require'care'.api
-            -- if care.doc_is_open() then care.close() end
+            -- Close the completion menu first (if open).
+            if blink_window.win:is_open() then
+                blink.hide()
+            end
+
             vim.lsp.buf.signature_help()
-        end, 'Signature Help', 'i')
+        end, 'Signature help', 'i')
     end
 
     if client:supports_method('textDocument/documentHighlight') then
@@ -80,25 +86,48 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 })
 
-vim.lsp.config["lua-language-server"] = {
-    cmd = { "lua-language-server" },
-    filetypes = { 'lua' },
-    settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-            },
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    "$VIMRUNTIME/lua",
-                    "${3rd}/luv/library",
+vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
+    once = true,
+    callback = function()
+        ---@param name string
+        ---@param config vim.lsp.Config
+        local function configure_server(name, config)
+            vim.lsp.config(name, config)
+            vim.lsp.enable(name)
+        end
+
+        configure_server('nixd', {
+            cmd = { 'nixd' },
+            filetypes = { 'nix' }
+        })
+
+        configure_server('lua_ls', {
+            cmd = { 'lua-language-server' },
+            filetypes = { 'lua' },
+            root_markers = { '.luarc.json', '.luarc.jsonc' },
+            -- NOTE: These will be merged with the configuration file.
+            settings = {
+                Lua = {
+                    completion = { callSnippet = 'Replace' },
+                    -- Using stylua for formatting.
+                    format = { enable = false },
+                    hint = {
+                        enable = true,
+                        arrayIndex = 'Disable',
+                    },
+                    runtime = {
+                        version = 'LuaJIT',
+                    },
+                    workspace = {
+                        checkThirdParty = false,
+                        library = {
+                            vim.env.VIMRUNTIME,
+                            '${3rd}/luv/library',
+                        },
+                    },
                 },
             },
-            diagnostics = {
-                globals = { 'MiniDeps', 'Snacks' }
-            }
-        },
-    },
-}
-vim.lsp.enable 'lua-language-server'
+        })
+    end
+})
+
