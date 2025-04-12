@@ -17,6 +17,8 @@
     hyprlock
     hypridle
     hyprpaper
+    hyprpanel
+    hyprpolkitagent
     swaynotificationcenter
     kando
     brightnessctl
@@ -24,5 +26,12 @@
     rofi-wayland
     cliphist
     wl-clipboard
+    power-profiles-daemon
+    wf-recorder
+    hyprpicker
+    hyprsunset
+    matugen
+    inputs.anyrun.packages.${system}.anyrun-with-all-plugins
+    nwg-dock-hyprland
   ];
 }

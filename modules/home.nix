@@ -28,6 +28,7 @@
     sticky-notes
     inputs.zen-browser.packages.${system}.twilight
     MtgDesktopCompanion
+    zoom-us
     # Games
     ferium
     portablemc

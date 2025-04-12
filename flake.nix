@@ -7,6 +7,16 @@
     };
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprpanel = {
+      url = "github:jas-singhfsu/hyprpanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -22,6 +32,7 @@
     nixpkgs,
     home-manager,
     nixos-cosmic,
+    hyprland,
     ...
   }: let
     inherit (self) outputs;
@@ -36,6 +47,8 @@
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications
+
+        inputs.hyprpanel.overlay
       ];
     };
   in {
@@ -59,11 +72,12 @@
           ./modules/services.nix
           ./modules/system.nix
           ./modules/thunar.nix
+          ./modules/hyprland.nix
 
           {
             home-manager = {
               backupFileExtension = "bak";
-              extraSpecialArgs = {inherit inputs outputs pkgs system;};
+              extraSpecialArgs = {inherit inputs outputs pkgs system; };
               users.jpierro = {
                 imports = [
                   ./modules/home.nix
