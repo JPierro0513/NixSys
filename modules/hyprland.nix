@@ -14,24 +14,22 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = with pkgs; [
+    kitty-img
+    kitty
     hyprlock
     hypridle
     hyprpaper
-    hyprpanel
     hyprpolkitagent
-    swaynotificationcenter
-    kando
+    pyprland
+    # swaynotificationcenter
+    mako
+    onagre
     brightnessctl
     playerctl
-    rofi-wayland
+    # rofi-wayland
     cliphist
     wl-clipboard
     power-profiles-daemon
     wf-recorder
-    hyprpicker
-    hyprsunset
-    matugen
-    inputs.anyrun.packages.${system}.anyrun-with-all-plugins
-    nwg-dock-hyprland
   ];
 }

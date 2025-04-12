@@ -1,19 +1,27 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    lix-unstable = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      flake = false;
+    };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        lix.follows = "lix-unstable";
+      };
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprpanel = {
-      url = "github:jas-singhfsu/hyprpanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    anyrun = {
-      url = "github:anyrun-org/anyrun";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -22,23 +30,23 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nsearch = {
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   outputs = inputs @ {
     self,
     nixpkgs,
-    home-manager,
-    nixos-cosmic,
-    hyprland,
+    lix-module,
     ...
   }: let
     inherit (self) outputs;
-    inherit (inputs) nixpkgs home-manager nixos-cosmic;
 
     system = "x86_64-linux";
+
     pkgs = import nixpkgs {
       inherit system;
       config = {
@@ -47,8 +55,6 @@
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications
-
-        inputs.hyprpanel.overlay
       ];
     };
   in {
@@ -63,21 +69,21 @@
         modules = [
           ./modules/settings.nix
 
-          home-manager.nixosModules.home-manager
-          nixos-cosmic.nixosModules.default
+          lix-module.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
 
-          ./hardware-configuration.nix
           ./configuration.nix
-          ./modules/fish.nix
-          ./modules/services.nix
+          ./hardware-configuration.nix
           ./modules/system.nix
+          ./modules/services.nix
+          ./modules/fish.nix
           ./modules/thunar.nix
           ./modules/hyprland.nix
 
           {
             home-manager = {
               backupFileExtension = "bak";
-              extraSpecialArgs = {inherit inputs outputs pkgs system; };
+              extraSpecialArgs = {inherit inputs outputs pkgs system;};
               users.jpierro = {
                 imports = [
                   ./modules/home.nix

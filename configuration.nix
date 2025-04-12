@@ -1,8 +1,7 @@
 {
-  # config,
+  inputs,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   boot.loader.systemd-boot.enable = true;
@@ -29,7 +28,7 @@
       package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa;
       enable32Bit = true;
       package32 = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pkgsi686Linux.mesa;
-      extraPackages = with pkgs; [ mesa amdvlk glxinfo rocmPackages.clr.icd ];
+      extraPackages = with pkgs; [mesa amdvlk glxinfo rocmPackages.clr.icd];
     };
   };
 
