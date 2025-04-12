@@ -92,8 +92,6 @@
     };
   };
 
-  services.mpris-proxy.enable = true;
-
   # Install Spicetify (Spotify)
   imports = [inputs.spicetify-nix.homeManagerModules.default];
   programs.spicetify = let

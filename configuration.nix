@@ -37,7 +37,7 @@
     defaultUserShell = pkgs.fish;
     users.jpierro = {
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "audio" "video" "udev"];
+      extraGroups = ["wheel" "networkmanager" "audio" "video" "udev" "input"];
     };
   };
   environment.localBinInPath = true;

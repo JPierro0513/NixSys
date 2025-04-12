@@ -20,9 +20,9 @@
     hypridle
     hyprpaper
     hyprpolkitagent
+    hyprsunset
     pyprland
-    # swaynotificationcenter
-    mako
+    swaynotificationcenter
     onagre
     brightnessctl
     playerctl
@@ -31,5 +31,6 @@
     wl-clipboard
     power-profiles-daemon
     wf-recorder
+    waybar
   ];
 }
