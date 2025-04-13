@@ -85,16 +85,18 @@
 
   stylix = {
     enable = true;
-    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/chalk.yaml";
+    base16Scheme = lib.mkDefault "${pkgs.base24-schemes}/share/themes/chalk.yaml";
     polarity = "dark";
     fonts = {
       serif = {
         # package = pkgs.source-serif-pro;
         name = "Monaspace Xenon";
+        package = pkgs.monaspace;
       };
       sansSerif = {
         # package = pkgs.rubik;
         name = "Monaspace Argon";
+        package = pkgs.monaspace;
       };
       monospace = {
         package = pkgs.monaspace;
