@@ -49,7 +49,7 @@
     overlays = import ./overlays {inherit inputs outputs;};
 
     devShells.${system} = {
-      esp-idf = import ./shells/esp-idf {};
+      esp-idf = import ./shells/esp-idf.nix {};
     };
 
     checks =
