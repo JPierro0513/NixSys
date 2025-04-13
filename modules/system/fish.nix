@@ -56,9 +56,6 @@
 
     '';
     shellAliases = {
-      "update" = "sudo nixos-rebuild switch";
-      "bupdate" = "sudo nixos-rebuild boot";
-      "clean" = "sudo nix store gc; nix store gc";
       "ls" = "eza --icons -1 --group-directories-first --git";
       "lt" = "ls --tree";
       "cat" = "bat";

@@ -1,32 +1,22 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      sdl3
-    ];
-  };
+{pkgs, ...}: {
+  imports = [
+    ./thunar.nix
+    ./fish.nix
+    ./fonts.nix
+    ./hyprland.nix
+  ];
 
   environment.systemPackages = with pkgs; [
-    # Getters
     wget
     curl
     git
     github-cli
-    # Archivers
+
     unzip
     kdePackages.ark
     kdePackages.kpmcore
     kdePackages.partitionmanager
-    # Important programs
+
     btop
     lazygit
     yazi
@@ -43,8 +33,11 @@
     inputs.nsearch.packages.${pkgs.system}.default
     zed-editor
     meld
-    glib
-    # Languages
+
+    steam
+    steamcmd
+    steam-tui
+
     gnumake
     clang
     python3
@@ -62,9 +55,9 @@
     hyprls
   ];
 
-  programs.neovim = {
+  programs.appimage = {
     enable = true;
-    defaultEditor = true;
+    binfmt = true;
   };
 
   programs.mtr.enable = true;
@@ -73,32 +66,13 @@
     enableSSHSupport = true;
   };
 
+  services.ollama.enable = true;
+
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
-
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
-  };
-
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      monaspace
-      roboto
-      rubik
-      source-serif-pro
-      nerd-fonts.hack
-      nerd-fonts.jetbrains-mono
-      font-awesome
-      material-design-icons
-    ];
-    fontconfig.defaultFonts = {
-      monospace = ["Monaspace Radon"];
-      sansSerif = ["Roboto"];
-      serif = ["Rubik"];
-      emoji = ["Noto Color Emoji"];
-    };
   };
 }

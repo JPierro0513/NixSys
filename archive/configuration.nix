@@ -7,8 +7,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -16,10 +16,11 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    font = "Lat2-Terminus16";
+    # font = "Lat2-Terminus16";
     keyMap = lib.mkDefault "us";
     useXkbConfig = true; # use xkb.options in tty.
   };
+  services.xserver.xkb.layout = "us";
 
   hardware = {
     graphics = {
@@ -27,16 +28,17 @@
       package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa;
       enable32Bit = true;
       package32 = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pkgsi686Linux.mesa;
-      extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd];
+      extraPackages = with pkgs; [mesa amdvlk glxinfo rocmPackages.clr.icd];
     };
-    amdgpu.amdvlk.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.jpierro = {
-    shell = pkgs.fish;
-    isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "audio" "video" "input" "udev"];
+  users = {
+    defaultUserShell = pkgs.fish;
+    users.jpierro = {
+      isNormalUser = true;
+      extraGroups = ["wheel" "networkmanager" "audio" "video" "udev" "input"];
+    };
   };
   environment.localBinInPath = true;
   services.getty.autologinUser = "jpierro";
