@@ -1,8 +1,6 @@
 {
   pkgs,
   inputs,
-  # lib,
-  # base24-schemes,
   ...
 }: {
   imports = [
@@ -84,32 +82,5 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
-  };
-
-  stylix = {
-    enable = true;
-    base24Scheme = "${pkgs.base24-schemes}/share/themes/chalk.yaml";
-    # base16Scheme = lib.mkDefault "${pkgs.base24-schemes}/share/themes/chalk.yaml";
-    polarity = "dark";
-    fonts = {
-      serif = {
-        # package = pkgs.source-serif-pro;
-        name = "Monaspace Xenon";
-        package = pkgs.monaspace;
-      };
-      sansSerif = {
-        # package = pkgs.rubik;
-        name = "Monaspace Argon";
-        package = pkgs.monaspace;
-      };
-      monospace = {
-        package = pkgs.monaspace;
-        name = "Monaspace Neon";
-      };
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
   };
 }

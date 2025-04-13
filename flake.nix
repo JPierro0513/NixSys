@@ -50,6 +50,26 @@
 
     devShells = import ./shells {inherit inputs outputs;};
 
+    checks =
+      nixpkgs.lib.attrsets.unionOfDisjoint {
+        git-hooks = inputs.git-hooks.lib.${system}.run {
+          hooks = {
+            deadnix.enable = true;
+            editorconfig-checker.enable = true;
+            hlint.enable = true;
+            alejandra = {
+              enable = true;
+              settings.width = 120;
+            };
+            statix.enable = true;
+            typos.enable = true;
+          };
+          src = ./.;
+        };
+        maintainers-sorted = (import ./stylix/check-maintainers-sorted.nix) pkgs;
+      }
+      self.packages.${system};
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit pkgs;
       specialArgs = {inherit inputs outputs system;};
@@ -83,7 +103,7 @@
         }
         # NixOS modules
         inputs.home-manager.nixosModules.home-manager
-        inputs.stylix.nixosModules.stylix
+        # inputs.stylix.nixosModules.stylix
         inputs.nixvim.nixosModules.nixvim
         # Custom modules
         ./configuration.nix
@@ -99,7 +119,7 @@
             extraSpecialArgs = {inherit inputs outputs pkgs system;};
             users.jpierro = {
               imports = [
-                # inputs.stylix.homeManagerModules.stylix
+                inputs.stylix.homeManagerModules.stylix
                 # Home modules
                 ./modules/home
               ];
