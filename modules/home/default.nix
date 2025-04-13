@@ -45,6 +45,12 @@
     xmage
   ];
 
+  dconf.settings."org/gnome/desktop/interface".icon-theme = "Papirus";
+  gtk.iconTheme = {
+    package = pkgs.papirus-icon-theme;
+    name = "Papirus";
+  };
+
   programs.git = {
     enable = true;
     userName = "JPierro0513";

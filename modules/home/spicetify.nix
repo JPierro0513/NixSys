@@ -21,6 +21,6 @@
       rotatingCoverart
       pointer
     ];
-    theme = spicepkgs.themes.hazy;
+    # theme = spicepkgs.themes.hazy;
   };
 }

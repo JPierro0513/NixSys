@@ -1,14 +1,16 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
     ./thunar.nix
     ./fish.nix
-    ./fonts.nix
+    # ./fonts.nix
     ./sddm.nix
     ./hyprland.nix
+    ./nixvim
   ];
 
   environment.systemPackages = with pkgs; [
@@ -47,7 +49,7 @@
     clang
     python3
     python3Packages.pip
-    python3Packages.pynvim
+    # python3Packages.pynvim
     sqlite
     nodejs
     rustup
@@ -81,8 +83,27 @@
     dedicatedServer.openFirewall = true;
   };
 
-  programs.neovim = {
+  stylix = {
     enable = true;
-    defaultEditor = true;
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/chalk.yaml";
+    polarity = "dark";
+    fonts = {
+      serif = {
+        # package = pkgs.source-serif-pro;
+        name = "Monaspace Xenon";
+      };
+      sansSerif = {
+        # package = pkgs.rubik;
+        name = "Monaspace Argon";
+      };
+      monospace = {
+        package = pkgs.monaspace;
+        name = "Monaspace Neon";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
   };
 }

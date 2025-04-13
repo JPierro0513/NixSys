@@ -1,8 +1,8 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     home-manager.url = "github:nix-community/home-manager";
+    stylix.url = "github:danth/stylix";
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -12,12 +12,17 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nsearch = {
       url = "github:niksingh710/nsearch";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = inputs @ {
@@ -76,6 +81,8 @@
         }
         # NixOS modules
         inputs.home-manager.nixosModules.home-manager
+        inputs.stylix.nixosModules.stylix
+        inputs.nixvim.nixosModules.nixvim
         # Custom modules
         ./configuration.nix
         ./hardware-configuration.nix
@@ -90,6 +97,7 @@
             extraSpecialArgs = {inherit inputs outputs pkgs system;};
             users.jpierro = {
               imports = [
+                # inputs.stylix.homeManagerModules.stylix
                 # Home modules
                 ./modules/home
               ];
