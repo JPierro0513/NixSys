@@ -1,7 +1,8 @@
 {
   pkgs,
   inputs,
-  lib,
+  # lib,
+  # base24-schemes,
   ...
 }: {
   imports = [
@@ -60,6 +61,8 @@
     alejandra
     openjdk21
     hyprls
+
+    # base24-schemes
   ];
 
   programs.appimage = {
@@ -85,7 +88,8 @@
 
   stylix = {
     enable = true;
-    base16Scheme = lib.mkDefault "${pkgs.base24-schemes}/share/themes/chalk.yaml";
+    base24Scheme = "${pkgs.base24-schemes}/share/themes/chalk.yaml";
+    # base16Scheme = lib.mkDefault "${pkgs.base24-schemes}/share/themes/chalk.yaml";
     polarity = "dark";
     fonts = {
       serif = {

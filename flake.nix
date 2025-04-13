@@ -48,6 +48,8 @@
 
     overlays = import ./overlays {inherit inputs outputs;};
 
+    devShells = import ./shells {inherit inputs outputs;};
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit pkgs;
       specialArgs = {inherit inputs outputs system;};
