@@ -48,7 +48,9 @@
 
     overlays = import ./overlays {inherit inputs outputs;};
 
-    devShells = import ./shells {inherit inputs outputs;};
+    devShells.${system} = {
+      esp-idf = import ./shells/esp-idf {};
+    };
 
     checks =
       nixpkgs.lib.attrsets.unionOfDisjoint {
