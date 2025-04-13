@@ -53,14 +53,14 @@
             flakeInputs = nixpkgs.lib.filterAttrs (_: nixpkgs.lib.isType "flake") inputs;
           in {
             extraOptions = ''download-buffer-size = 500000000'';
+            channel.enable = false;
+            registry = nixpkgs.lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+            nixPath = nixpkgs.lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
             settings = {
               auto-optimise-store = true;
               experimental-features = ["nix-command" "flakes"];
               flake-registry = "";
               # nix-path = config.nix.nixPath;
-              channel.enable = false;
-              registry = nixpkgs.lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-              nixPath = nixpkgs.lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
               substituters = [
                 "https://nix-community.cachix.org"
                 "https://chaotic-nyx.cachix.org"
