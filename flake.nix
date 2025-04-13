@@ -24,10 +24,17 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    swww.url = "github:LGFae/swww";
+
+    # nixpkgs-esp-dev = {
+    #   url = "github:mirrexagon/nixpkgs-esp-dev";
+    # };
   };
   outputs = inputs @ {
     self,
     nixpkgs,
+    nixpkgs-esp-dev,
     ...
   }: let
     inherit (self) outputs;
@@ -48,9 +55,23 @@
 
     overlays = import ./overlays {inherit inputs outputs;};
 
-    devShells.${system} = {
-      esp-idf = import ./shells/esp-idf.nix {};
-    };
+    # devShells.${system} = {
+    #   esp-idf = let
+    #     esp-pkgs = import nixpkgs {
+    #       inherit system;
+    #       overlays = [(import "${nixpkgs-esp-dev}/overlay.nix")];
+    #     };
+    #   in
+    #     pkgs.mkShell {
+    #       name = "esp-idf";
+    #       buildInputs = with esp-pkgs; [
+    #         (esp-idf-full.override {
+    #           rev = "v5.4.1";
+    #           sha256 = "sha256-5hwoy4QJFZdLApybV0LCxFD2VzM3Y6V7Qv5D3QjI16I=";
+    #         })
+    #       ];
+    #     };
+    # };
 
     checks =
       nixpkgs.lib.attrsets.unionOfDisjoint {

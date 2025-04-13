@@ -26,5 +26,6 @@
     playerctl
     albert
     waybar
+    inputs.swww.packages.${pkgs.system}.swww
   ];
 }
