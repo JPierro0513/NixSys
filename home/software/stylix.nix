@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  # lib,
   ...
 }: {
   imports = [inputs.stylix.homeManagerModules.stylix];
@@ -21,6 +22,7 @@
       dark = "Papirus";
       light = "Papirus";
     };
+    image = null;
     # fonts = {
     #   serif = {
     #     # package = pkgs.source-serif-pro;

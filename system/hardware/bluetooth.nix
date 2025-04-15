@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluez5-experimental;
+    # package = pkgs.bluez5-experimental;
     powerOnBoot = true;
     settings = {
       # make Xbox Series X controller work
@@ -25,6 +25,8 @@
     wantedBy = ["default.target"];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
+
+  environment.systemPackages = with pkgs; [bluez bluez-tools blueman];
 
   # services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
   #   "monitor.bluez.properties" = {

@@ -1,5 +1,5 @@
-_: {
-  programs.hyprlock = {
+{lib, ...}: {
+  programs.hyprlock = lib.mkForce {
     enable = true;
 
     settings = {

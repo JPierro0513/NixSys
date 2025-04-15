@@ -1,5 +1,5 @@
 {
-  config,
+  # config,
   pkgs,
   ...
 }: let
@@ -28,7 +28,7 @@ in {
         (makeCommand "swww-daemon")
         (makeCommand "wl-paste --type image --watch cliphist store")
         (makeCommand "wl-paste --type text --watch cliphist store")
-	(makeCommand "albert")
+        (makeCommand "albert")
       ];
       input = {
         keyboard.xkb.layout = "us";
@@ -85,13 +85,13 @@ in {
         shadow = {
           enable = true;
         };
-        preset-column-widths = [
-          {proportion = 0.25;}
-          {proportion = 0.5;}
-          {proportion = 0.75;}
-          {proportion = 1.0;}
-        ];
-        default-column-width = {proportion = 0.5;};
+        # preset-column-widths = [
+        #   {proportion = 0.25;}
+        #   {proportion = 0.5;}
+        #   {proportion = 0.75;}
+        #   {proportion = 1.0;}
+        # ];
+        # default-column-width = {proportion = 0.5;};
 
         gaps = 6;
         struts = {
@@ -150,8 +150,8 @@ in {
           return color;
         }
       '';
-      prefer-no-csd = true;
-      hotkey-overlay.skip-at-startup = true;
+      # prefer-no-csd = true;
+      # hotkey-overlay.skip-at-startup = true;
     };
   };
 }
