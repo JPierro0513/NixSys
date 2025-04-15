@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     zed-editor
     nodejs
-    vscode-vscode-langservers-extracted
+    vscode-langservers-extracted
     nil
     nixd
     stylua

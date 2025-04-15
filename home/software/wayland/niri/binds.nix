@@ -26,7 +26,7 @@
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
-    "Mod+Space".action = spawn "${pkgs.anyrun}/bin/anyrun";
+    "Mod+Space".action = spawn "${pkgs.albert}/bin/albert" "toggle";
     "Mod+Return".action = spawn "${
       inputs.ghostty.packages.${pkgs.system}.default
     }/bin/ghostty";

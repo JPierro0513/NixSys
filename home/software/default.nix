@@ -4,9 +4,9 @@
   ...
 }: {
   imports = [
-    ./anyrun
-    ./browsers/zen.nix
-    ./stylix.nix
+    # ./anyrun
+    # ./browsers/zen.nix
+    # ./stylix.nix
   ];
 
   home.packages = with pkgs; [
@@ -34,6 +34,7 @@
 
     swww
     inputs.ghostty.packages.${pkgs.system}.default
+    inputs.zen-browser.packages.${pkgs.system}.twilight
 
     onlyoffice-bin
     teams-for-linux
@@ -51,5 +52,6 @@
     forge-mtg
     cockatrice
     xmage
+    albert
   ];
 }

@@ -23,7 +23,7 @@
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    anyrun.url = "github:fufexan/anyrun/launch-prefix";
+    # anyrun.url = "github:fufexan/anyrun/launch-prefix";
 
     ghostty = {
       url = "github:ghostty-org/ghostty";
@@ -42,15 +42,14 @@
       };
     };
 
-    zen-browser = {
-      url = "github:pfaj/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     nsearch = {
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = inputs:

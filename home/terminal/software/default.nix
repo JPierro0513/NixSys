@@ -10,5 +10,5 @@
     ./zoxide.nix
   ];
 
-  home.packages = with pkgs; [alejandra deadnix statix self.packages.${pkgs.system}.repl];
+  home.packages = with pkgs; [alejandra deadnix statix];
 }

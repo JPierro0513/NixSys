@@ -11,6 +11,7 @@ _: {
 
       background = [
         {
+          monitor = "";
           path = "screenshot";
           blur_passes = 3;
           blur_size = 12;
@@ -24,7 +25,7 @@ _: {
 
       input-field = [
         {
-          monitor = "eDP-1";
+          monitor = "";
 
           size = "300, 50";
           valign = "bottom";
@@ -57,7 +58,7 @@ _: {
             cmd[update:1000] echo "<span font-weight='light' >$(date +'%H %M %S')</span>"
           '';
           font_size = 300;
-          font_family = "SF Pro Ultralight";
+          font_family = "Monaspace Krypton";
 
           color = "rgb(8a9e6b)";
 
