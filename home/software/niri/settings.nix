@@ -26,6 +26,7 @@ in {
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         (makeCommand "hyprlock")
         (makeCommand "swww-daemon")
+        (makeCommand "swww img ~/wallpapers/fireplace.gif")
         (makeCommand "wl-paste --type image --watch cliphist store")
         (makeCommand "wl-paste --type text --watch cliphist store")
         (makeCommand "albert")
@@ -43,6 +44,10 @@ in {
           middle-emulation = true;
           accel-profile = "adaptive";
           # scroll-factor = 0.2;
+        };
+        mouse = {
+          accel-profile = "adaptive";
+          scroll-factor = 2.0;
         };
         focus-follows-mouse.enable = true;
         warp-mouse-to-focus = true;

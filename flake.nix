@@ -1,65 +1,67 @@
 {
-  description = "A Flake to try out Niri";
+  description = "Hopefully a less confusing flake";
 
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    flake-compat.url = "github:edolstra/flake-compat";
-
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      # inputs.systems.follows = "systems";
-    };
-
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
-    # anyrun.url = "github:fufexan/anyrun/launch-prefix";
-
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
+    stylix.url = "github:danth/stylix";
 
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-      };
-    };
-
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
     nsearch = {
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    stylix.url = "github:danth/stylix";
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        ./system
+        ./home
+      ];
       systems = ["x86_64-linux"];
-
-      imports = [./home/profiles ./hosts ./pkgs];
-
-      perSystem = {pkgs, ...}: {
+      perSystem = {
+        # config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
         formatter = pkgs.alejandra;
+
+        packages = import ./pkgs pkgs;
+
+        checks =
+          inputs'.nixpkgs.lib.attrsets.unionOfDisjoint {
+            git-hooks = inputs.git-hooks.lib.${system}.run {
+              hooks = {
+                deadnix.enable = true;
+                editorconfig-checker.enable = true;
+                hlint.enable = true;
+                alejandra = {
+                  enable = true;
+                  settings.width = 120;
+                };
+                statix.enable = true;
+                typos.enable = true;
+              };
+              src = ./.;
+            };
+            maintainers-sorted = (import ./stylix/check-maintainers-sorted.nix) pkgs;
+          }
+          self'.packages.${system};
       };
     };
 }

@@ -1,48 +1,83 @@
 {
   inputs,
   pkgs,
+  config,
   ...
-}: {
+}: let
+  conf = config.xdg.configHome;
+  cache = config.xdg.cacheHome;
+in {
   imports = [
-    # ./anyrun
-    # ./browsers/zen.nix
-    ./stylix.nix
+    ./bat.nix
+    ./git.nix
+    ./gpg.nix
+    ./skim.nix
+    ./yazi.nix
+    ./ghostty.nix
+
+    ./niri
   ];
 
   home.packages = with pkgs; [
-    # messaging
-    vesktop
+    # archives
+    zip
+    unzip
+    unrar
+    kdePackages.ark
 
     # misc
-    colord
-    ffmpegthumbnailer
-    imagemagick
-    cliphist
-    nodejs
-    nodePackages.npm
-
-    fastfetch
+    libnotify
+    fontconfig
+    alejandra
+    deadnix
+    statix
     netscanner
 
-    # gnome
-    dconf-editor
-    amberol
-    loupe
-    pwvucontrol
-    resources
-    gnome-control-center
+    # term
+    wget
+    curl
+    btop
+    lazygit
+    fastfetch
+    eza
+    fd
+    ripgrep
+    killall
+    viu
+    fzf
+    zoxide
+    inputs.nsearch.packages.${pkgs.system}.default
+    krabby
+    fortune
+    pokemonsay
+    tmux
 
-    swww
-    inputs.ghostty.packages.${pkgs.system}.default
-    inputs.zen-browser.packages.${pkgs.system}.twilight
+    # langs
+    nodejs
+    nodePackages.npm
+    vscode-langservers-extracted
+    lua
+    luajit
+    lua-language-server
+    nil
+    nixd
+    rustup
+    python313
+    python313Packages.pip
 
+    # desktop
+    vesktop
     onlyoffice-bin
+    inputs.zen-browser.packages.${system}.twilight
+    meld
+    kdePackages.kpmcore
+    kdePackages.partitionmanager
     teams-for-linux
     zoom-us
-
+    xfce.ristretto
     obsidian
-    sticky-notes
 
+    # games
     ferium
     portablemc
     prismlauncher
@@ -51,7 +86,26 @@
     openttd
     forge-mtg
     cockatrice
-    xmage
-    albert
+
+    # gnome
+    dconf-editor
+    pwvucontrol
+    resources
+    gnome-control-center
   ];
+
+  home.sessionVariables = {
+    # clean up ~
+    LESSHISTFILE = "${cache}/less/history";
+    LESSKEY = "${conf}/less/lesskey";
+    XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority";
+    DIRENV_LOG_FORMAT = "";
+  };
+
+  programs = {
+    ssh.enable = true;
+    dircolors = {
+      enable = true;
+    };
+  };
 }

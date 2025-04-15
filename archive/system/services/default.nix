@@ -1,11 +1,4 @@
 _: {
-  imports = [
-    ./gnome-services.nix
-    ./pipewire.nix
-    ./power.nix
-    ./sddm.nix
-  ];
-
   services = {
     printing.enable = true;
 

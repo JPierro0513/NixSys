@@ -1,18 +1,16 @@
-{self, ...}: {
+_: {
   nixpkgs = {
     config.allowUnfree = true;
-    # config.permittedInsecurePackages = [
-    #   "electron-25.9.0"
-    # ];
 
-    overlays = [
-      (final: prev: {
-        # lib =
-        #   prev.lib
-        #   // {
-        #     colors = import "${self}/lib/colors" prev.lib;
-        #   };
-      })
-    ];
+    overlays =
+      (final: _prev: import ../../pkgs final.pkgs) # Custom packages
+      ++ [
+        (final: prev: {
+          # Any modifications to existing packages
+          zed-editor = prev.zed-editor.overrideAttrs (oldAttrs: {
+            version = "0.182.8";
+          });
+        })
+      ];
   };
 }

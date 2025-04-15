@@ -28,7 +28,7 @@
           monitor = "";
 
           size = "300, 50";
-          valign = "bottom";
+          valign = "center";
           position = "0%, 10%";
 
           outline_thickness = 1;
