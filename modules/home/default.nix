@@ -45,12 +45,6 @@
     xmage
   ];
 
-  # dconf.settings."org/gnome/desktop/interface".icon-theme = "Papirus";
-  # gtk.iconTheme = {
-  #   package = pkgs.papirus-icon-theme;
-  #   name = "Papirus";
-  # };
-
   programs.git = {
     enable = true;
     userName = "JPierro0513";
@@ -64,6 +58,7 @@
 
   stylix = {
     enable = true;
+    autoEnable = true;
     base16Scheme = "${pkgs.base24-schemes}/share/themes/chalk.yaml";
     polarity = "dark";
     cursor = {

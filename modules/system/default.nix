@@ -44,12 +44,12 @@
     steamcmd
     steam-tui
 
-    gnumake
-    clang
-    python3
-    python3Packages.pip
+    # gnumake
+    # clang
+    # python3
+    # python3Packages.pip
     # python3Packages.pynvim
-    sqlite
+    # sqlite
     nodejs
     rustup
     lua
@@ -59,8 +59,6 @@
     alejandra
     openjdk21
     hyprls
-
-    # base24-schemes
   ];
 
   programs.appimage = {

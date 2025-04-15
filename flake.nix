@@ -26,15 +26,10 @@
     };
 
     swww.url = "github:LGFae/swww";
-
-    # nixpkgs-esp-dev = {
-    #   url = "github:mirrexagon/nixpkgs-esp-dev";
-    # };
   };
   outputs = inputs @ {
     self,
     nixpkgs,
-    nixpkgs-esp-dev,
     ...
   }: let
     inherit (self) outputs;
@@ -54,25 +49,7 @@
     formatter = pkgs.alejandra;
 
     overlays = import ./overlays {inherit inputs outputs;};
-
-    # devShells.${system} = {
-    #   esp-idf = let
-    #     esp-pkgs = import nixpkgs {
-    #       inherit system;
-    #       overlays = [(import "${nixpkgs-esp-dev}/overlay.nix")];
-    #     };
-    #   in
-    #     pkgs.mkShell {
-    #       name = "esp-idf";
-    #       buildInputs = with esp-pkgs; [
-    #         (esp-idf-full.override {
-    #           rev = "v5.4.1";
-    #           sha256 = "sha256-5hwoy4QJFZdLApybV0LCxFD2VzM3Y6V7Qv5D3QjI16I=";
-    #         })
-    #       ];
-    #     };
-    # };
-
+ 
     checks =
       nixpkgs.lib.attrsets.unionOfDisjoint {
         git-hooks = inputs.git-hooks.lib.${system}.run {
@@ -136,7 +113,6 @@
         # Home configuration
         {
           home-manager = {
-            useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "bak";
             extraSpecialArgs = {inherit inputs outputs pkgs system;};

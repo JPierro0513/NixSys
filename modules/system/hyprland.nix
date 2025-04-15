@@ -8,6 +8,7 @@
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
+    withUWSM = true;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -27,5 +28,7 @@
     albert
     waybar
     inputs.swww.packages.${pkgs.system}.swww
+    kitty
+    kdePackages.xwaylandvideobridge
   ];
 }
