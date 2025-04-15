@@ -8,7 +8,7 @@
 
     flake-utils = {
       url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
+      # inputs.systems.follows = "systems";
     };
 
     flake-parts = {

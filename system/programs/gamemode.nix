@@ -14,4 +14,10 @@
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 }
