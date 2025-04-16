@@ -71,7 +71,7 @@ in {
     vesktop
     onlyoffice-bin
     inputs.zen-browser.packages.${system}.twilight
-    zed-editor
+    zed-editor 
     meld
     kdePackages.kpmcore
     kdePackages.partitionmanager
@@ -79,6 +79,7 @@ in {
     zoom-us
     xfce.ristretto
     obsidian
+    MtgDesktopCompanion
 
     # games
     ferium

@@ -1,13 +1,9 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   # greetd display manager
   services.greetd = let
     session = {
-      command = "${inputs.lemurs.packages.${pkgs.system}.default}/bin/lemurs";
-      user = "greetd";
+      command = "${pkgs.niri}/bin/niri-session";
+      user = "jpierro";
     };
   in {
     enable = true;
