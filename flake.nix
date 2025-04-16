@@ -16,10 +16,16 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xwayland-sattelite.url = "github:Supreeeme/xwayland-satellite";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nsearch = {
       url = "github:niksingh710/nsearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lemurs = {
+      url = "github:coastalwhite/lemurs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

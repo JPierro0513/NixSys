@@ -28,6 +28,9 @@
       cliphist
 
       swaynotificationcenter
+
+      # inputs.xwayland-sattelite.packages.${system}.default
+      swww
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";

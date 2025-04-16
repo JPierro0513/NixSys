@@ -3,7 +3,7 @@ _: {
     ./gnome-services.nix
     ./pipewire.nix
     ./power.nix
-    ./sddm.nix
+    ./lemurs.nix
   ];
 
   services = {

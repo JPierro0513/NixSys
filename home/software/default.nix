@@ -18,6 +18,8 @@ in {
     ./niri
   ];
 
+  # nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     # archives
     zip
@@ -51,13 +53,13 @@ in {
     fortune
     pokemonsay
     tmux
+    thundery
 
     # langs
     nodejs
     nodePackages.npm
     vscode-langservers-extracted
     lua
-    luajit
     lua-language-server
     nil
     nixd
@@ -69,6 +71,7 @@ in {
     vesktop
     onlyoffice-bin
     inputs.zen-browser.packages.${system}.twilight
+    zed-editor
     meld
     kdePackages.kpmcore
     kdePackages.partitionmanager
