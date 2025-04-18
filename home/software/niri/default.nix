@@ -6,9 +6,9 @@
   imports = [
     inputs.niri.homeModules.niri
 
-    # ./settings.nix
-    # ./binds.nix
-    # ./rules.nix
+    ./settings.nix
+    ./binds.nix
+    ./rules.nix
 
     ./hyprlock.nix
     ./wlogout.nix
@@ -26,10 +26,11 @@
       # utils
       wl-clipboard
       cliphist
-
+      brillo
+      playerctl
       swaynotificationcenter
-
-      # inputs.xwayland-sattelite.packages.${system}.default
+      waybar
+      xwayland-satellite
       swww
     ];
     sessionVariables = {

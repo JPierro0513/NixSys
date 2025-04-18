@@ -66,12 +66,13 @@ in {
     rustup
     python313
     python313Packages.pip
+    clang
 
     # desktop
     vesktop
     onlyoffice-bin
     inputs.zen-browser.packages.${system}.twilight
-    zed-editor 
+    zed-editor
     meld
     kdePackages.kpmcore
     kdePackages.partitionmanager

@@ -40,7 +40,7 @@
       "audio"
       "video"
       "networkmanager"
-      "uucp"
+      "dialout"
       # "adbusers"
       # "input"
       # "libvirtd"

@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   ...
 }: {
@@ -27,12 +26,11 @@
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+Space".action = spawn "${pkgs.albert}/bin/albert" "toggle";
-    "Mod+Return".action = spawn "${
-      inputs.ghostty.packages.${pkgs.system}.default
-    }/bin/ghostty";
-    "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
+    "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
+    "Mod+E".action = spawn "thunar";
+    "Ctrl+Alt+L".action = spawn "sh" "-c" "pgrep hyprlock || hyprlock";
 
-    "Mod+U".action = spawn "env XDG_CURRENT_DESKTOP=gnome gnome-control-center";
+    "Mod+U".action = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
 
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;
@@ -48,9 +46,9 @@
     "Mod+Tab".action = switch-focus-between-floating-and-tiling;
 
     "Mod+Minus".action = set-column-width "-10%";
-    "Mod+Plus".action = set-column-width "+10%";
+    "Mod+Equal".action = set-column-width "+10%";
     "Mod+Shift+Minus".action = set-window-height "-10%";
-    # "Mod+Shift+Plus".action = set-window-height "+10%";
+    "Mod+Shift+Equal".action = set-window-height "+10%";
 
     "Mod+H".action = focus-column-left;
     "Mod+L".action = focus-column-right;

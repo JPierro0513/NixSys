@@ -27,7 +27,7 @@
     "^(confirm)"
     "^(download)"
     "^(error)"
-    "^(notification)"
+    # "^(notification)"
   ];
 
   floatingRules = builtins.map (appId:
@@ -81,19 +81,11 @@
       };
     }
     {
-      matches = [{app-id = "org.telegram.desktop";}];
-      block-out-from = "screencast";
-    }
-    {
-      matches = [{app-id = "app.drey.PaperPlane";}];
-      block-out-from = "screencast";
-    }
-    {
       matches = [
         {app-id = "^(zen|firefox|chromium-browser|chrome-.*|zen-.*)$";}
         {app-id = "^(xdg-desktop-portal-gtk)$";}
       ];
-      scroll-factor = 0.1;
+      # scroll-factor = 0.1;
     }
     {
       matches = [
