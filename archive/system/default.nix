@@ -1,20 +1,34 @@
-let
-  laptop = [
-    ./core/boot.nix
-    ./core/default.nix
+{
+  self,
+  inputs,
+  homeImports,
+  ...
+}: {
+  flake.nixosConfigurations = let
+    inherit (inputs.nixpkgs.lib) nixosSystem;
+    specialArgs = {inherit inputs self;};
+  in {
+    nixos = nixosSystem {
+      inherit specialArgs;
+      modules = [
+        ./configuration.nix
+        ./hardware-configuration.nix
+        ./core
+        ./nix
+        ./hardware
+        ./services
+        ./programs
 
-    ./hardware/graphics.nix
-    ./hardware/bluetooth.nix
+        {
+          home-manager = {
+            users.jpierro.imports =
+              homeImports."jpierro@nixos";
+            extraSpecialArgs = specialArgs;
+          };
+        }
 
-    ./network/default.nix
-
-    ./programs
-
-    ./services
-    ./services/greetd.nix
-    ./services/pipewire.nix
-    ./services/power.nix
-  ];
-in {
-  inherit laptop;
+        inputs.chaotic.nixosModules.default
+      ];
+    };
+  };
 }

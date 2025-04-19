@@ -1,16 +1,43 @@
-_: {
+{inputs, ...}: {
   imports = [
-    ./fonts.nix
-    ./home-manager.nix
-    # ./qt.nix
-    ./xdg.nix
+    ./fish.nix
+    ./thunar.nix
+    ./portal.nix
+
+    inputs.hm.nixosModules.default
   ];
 
-  programs = {
-    # make HM-managed GTK stuff work
-    dconf.enable = true;
-    # seahorse.enable = true;
-    # adb.enable = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "bak";
   };
-  # services.udev.packages = [pkgs.android-udev-rules];
+
+  programs = {
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+    dconf.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    gamemode = {
+      enable = true;
+      settings = {
+        general = {
+          softrealtime = "auto";
+          renice = 15;
+        };
+      };
+    };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
+  };
+
+  services.ollama.enable = true;
 }

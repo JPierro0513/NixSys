@@ -1,4 +1,11 @@
 _: {
+  imports = [
+    ./gnome-services.nix
+    ./pipewire.nix
+    ./power.nix
+    ./greetd.nix
+  ];
+
   services = {
     printing.enable = true;
 

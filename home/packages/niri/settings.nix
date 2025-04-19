@@ -56,31 +56,6 @@ in {
         workspace-auto-back-and-forth = true;
       };
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
-      outputs = {
-        # "eDP-1" = {
-        #   scale = 1.0;
-        #   position = {
-        #     x = 0;
-        #     y = 0;
-        #   };
-        # };
-        # "HDMI-A-1" = {
-        #   mode = {
-        #     width = 1920;
-        #     height = 1080;
-        #     refresh = null;
-        #   };
-        #   scale = 1.0;
-        #   position = {
-        #     x = 0;
-        #     y = -1080;
-        #   };
-        # };
-      };
-      # cursor = {
-      #   size = 20;
-      #   theme = "${pointer.name}";
-      # };
       layout = {
         focus-ring.enable = false;
         border = {

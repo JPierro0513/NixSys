@@ -9,7 +9,6 @@
     ./settings.nix
     ./binds.nix
     ./rules.nix
-
     ./hyprlock.nix
     ./wlogout.nix
   ];
@@ -26,7 +25,7 @@
       # utils
       wl-clipboard
       cliphist
-      brillo
+      brightnessctl
       playerctl
       swaynotificationcenter
       waybar

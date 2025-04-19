@@ -1,24 +1,39 @@
-_: {
+{pkgs, ...}: {
   imports = [
-    ./gnome-services.nix
-    ./pipewire.nix
+    ./bluetooth.nix
     ./power.nix
     ./greetd.nix
   ];
 
+  security.rtkit.enable = true;
+  environment.systemPackages = with pkgs; [pavucontrol];
+
   services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = true;
+      jack.enable = true;
+    };
+    fstrim.enable = true;
+    scx.enable = true;
+    scx.scheduler = "scx_rusty";
     printing.enable = true;
-
-    dbus.implementation = "broker";
-
-    # profile-sync-daemon
     psd = {
       enable = true;
       resyncTimer = "10m";
     };
+    dbus = {
+      implementation = "broker";
+      packages = with pkgs; [
+        gcr
+        gnome-settings-daemon
+      ];
+    };
+    gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
   };
 
-  # Use in place of hypridle's before_sleep_cmd, since systemd does not wait for it to complete
   powerManagement = {
     enable = true;
     powerDownCommands = ''
@@ -30,5 +45,6 @@ _: {
     '';
   };
 
-  hardware.brillo.enable = true;
+  services.avahi.enable = true;
+  services.openssh.enable = true;
 }

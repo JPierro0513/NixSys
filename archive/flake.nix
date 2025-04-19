@@ -1,25 +1,38 @@
 {
+  description = "Hopefully a less confusing flake";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    home-manager.url = "github:nix-community/home-manager";
-    stylix.url = "github:danth/stylix";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    hm = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix.url = "github:danth/stylix";
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    nsearch.url = "github:niksingh710/nsearch";
+    nsearch = {
+      url = "github:niksingh710/nsearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
+
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         ./system
-        # ./home
+        ./home
       ];
       systems = ["x86_64-linux"];
       perSystem = {
+        # config,
         self',
         inputs',
         pkgs,

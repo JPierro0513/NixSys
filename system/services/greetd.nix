@@ -16,7 +16,4 @@
 
   # unlock GPG keyring on login
   security.pam.services.greetd.enableGnomeKeyring = true;
-
-  # services.displayManager.autoLogin.enable = true;
-  # services.displayManager.autoLogin.user = "linuxmobile";
 }

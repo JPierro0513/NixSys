@@ -1,6 +1,4 @@
 {
-  imports = [./hardware-configuration.nix];
-
   boot = {
     kernelModules = ["amdgpu"];
     kernelParams = [
