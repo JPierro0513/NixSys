@@ -11,6 +11,7 @@
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nsearch.url = "github:niksingh710/nsearch";
+    tabby.url = "github:ChocolateLoverRaj/tabby/nix";
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {

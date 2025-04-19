@@ -50,6 +50,7 @@ in {
     xfce.ristretto
     obsidian
     MtgDesktopCompanion
+    inputs.tabby.packages.${system}.default
 
     # games
     ferium
