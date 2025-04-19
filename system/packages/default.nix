@@ -40,7 +40,6 @@
     steamcmd
     steam-tui
 
-    clangd-lsp
     clang
     nodejs
     nodePackages.npm
@@ -59,6 +58,8 @@
     useUserPackages = true;
     backupFileExtension = "bak";
   };
+
+  programs.dconf.enable = true;
 
   programs.appimage = {
     enable = true;

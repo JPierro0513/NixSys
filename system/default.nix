@@ -23,7 +23,7 @@
           home-manager = {
             users.jpierro.imports = [
               ../home/services
-              ../home/software
+              ../home/packages
               ../home/stylix.nix
               {
                 home = {

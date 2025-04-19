@@ -22,25 +22,25 @@
       light = "Papirus";
     };
     image = null;
-    # fonts = {
-    #   serif = {
-    #     # package = pkgs.source-serif-pro;
-    #     name = "Monaspace Xenon";
-    #     package = pkgs.monaspace;
-    #   };
-    #   sansSerif = {
-    #     # package = pkgs.rubik;
-    #     name = "Monaspace Argon";
-    #     package = pkgs.monaspace;
-    #   };
-    #   monospace = {
-    #     package = pkgs.monaspace;
-    #     name = "Monaspace Neon";
-    #   };
-    #   emoji = {
-    #     package = pkgs.noto-fonts-emoji;
-    #     name = "Noto Color Emoji";
-    #   };
-    # };
+    fonts = {
+      serif = {
+        # package = pkgs.source-serif-pro;
+        name = "Monaspace Xenon";
+        package = pkgs.monaspace;
+      };
+      sansSerif = {
+        # package = pkgs.rubik;
+        name = "Monaspace Argon";
+        package = pkgs.monaspace;
+      };
+      monospace = {
+        package = pkgs.monaspace;
+        name = "Monaspace Neon";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
   };
 }

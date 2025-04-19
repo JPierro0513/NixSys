@@ -31,6 +31,7 @@
       waybar
       xwayland-satellite
       swww
+      albert
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
