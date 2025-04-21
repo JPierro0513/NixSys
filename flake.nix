@@ -30,22 +30,29 @@
         packages = import ./pkgs pkgs;
 
         devShells.esp-idf = pkgs.mkShell {
-          name = "esp-idf-env";
+          name = "esp-idf";
           buildInputs = with pkgs; [
             (pkgs.callPackage ./pkgs/esp-toolchain.nix {})
 
-            wget git gnumake
-            flex bison
+            wget
+            git
+            gnumake
+            flex
+            bison
             gperf
             pkg-config
-            clang cmake ninja
+            clang
+            cmake
+            ninja
             kconf
             ncurses
-            (python3.withPackages (p: with p; [
-              pip virtualenv
-            ]))
+            (python3.withPackages (p:
+              with p; [
+                pip
+                virtualenv
+              ]))
           ];
-          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libusb1];
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libusb1 pkgs.glibc];
           shellHook = ''
             export IDF_PATH=/home/jpierro/esp/esp-idf
             export PATH=$IDF_PATH/tools:$PATH
