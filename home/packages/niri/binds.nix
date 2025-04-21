@@ -29,7 +29,7 @@
     "Mod+Space".action = spawn "${pkgs.albert}/bin/albert" "toggle";
     "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
     "Mod+E".action = spawn "thunar";
-    "Mod+N".action = spawn "swaync-client -t -sw";
+    "Mod+Shift+N".action = spawn "swaync-client -t -sw";
 
     "Ctrl+Alt+L".action = spawn "sh" "-c" "pgrep hyprlock || hyprlock";
 

@@ -17,15 +17,12 @@
     packages = with pkgs; [
       seatd
       niri
-
-      # screenshot
       grim
       slurp
-
-      # utils
       wl-clipboard
       cliphist
       playerctl
+      pwvucontrol
       brillo
       swaynotificationcenter
       waybar
