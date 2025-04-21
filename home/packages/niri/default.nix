@@ -25,8 +25,8 @@
       # utils
       wl-clipboard
       cliphist
-      brightnessctl
       playerctl
+      brillo
       swaynotificationcenter
       waybar
       xwayland-satellite

@@ -66,6 +66,13 @@ in {
     pwvucontrol
     resources
     gnome-control-center
+
+    # fonts
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.hack
+    monaspace
+    rubik
+    roboto
   ];
 
   programs.ghostty = {
@@ -77,7 +84,6 @@ in {
       cursor-style = "bar";
       cursor-style-blink = true;
       mouse-hide-while-typing = true;
-      # theme = "camellia-hope";
     };
   };
 
@@ -97,7 +103,6 @@ in {
     homedir = "${config.xdg.dataHome}/gnupg";
     settings = {
       use-agent = true;
-      # default-key = "481EFFCF2C7B8C7B";
     };
   };
 }
