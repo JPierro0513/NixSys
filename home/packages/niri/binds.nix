@@ -25,9 +25,12 @@
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
+
     "Mod+Space".action = spawn "${pkgs.albert}/bin/albert" "toggle";
     "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
     "Mod+E".action = spawn "thunar";
+    "Mod+N".action = spawn "swaync-client -t -sw";
+
     "Ctrl+Alt+L".action = spawn "sh" "-c" "pgrep hyprlock || hyprlock";
 
     "Mod+U".action = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
