@@ -27,7 +27,7 @@
       config = {allowUnfree = true;};
       overlays = [
         inputs.neovim-nightly-overlay.overlays.default
-        inputs.niri.overlays.niri
+        # inputs.niri.overlays.niri
         # custom packages
         (final: _prev: import ./overlays final.pkgs)
         # Any modifications to existing packages

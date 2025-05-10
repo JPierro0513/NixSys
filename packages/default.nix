@@ -5,6 +5,8 @@
 }: {
   imports = [
     ./thunar.nix
+
+    ./niri
   ];
 
   environment.systemPackages = with pkgs; [

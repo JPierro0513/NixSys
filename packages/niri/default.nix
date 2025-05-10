@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.niri.homeModules.niri
+    inputs.niri.nixosModules.niri
   ];
 
   programs.niri = {
@@ -13,7 +13,7 @@
 
   # home.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     seatd
     niri
     grimblast
