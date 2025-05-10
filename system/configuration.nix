@@ -8,6 +8,7 @@
   i18n.extraLocaleSettings = {LC_ALL = "en_US.UTF-8";};
 
   # Define a user account.
+  programs.fish.enable = true;
   users.users.jpierro = {
     shell = pkgs.fish;
     isNormalUser = true;

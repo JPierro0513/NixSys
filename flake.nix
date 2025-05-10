@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
     niri = {
       url = "github:sodiboo/niri-flake";
@@ -17,7 +21,7 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    specialArgs = {inherit inputs;};
+    specialArgs = {inherit self inputs;};
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
@@ -35,11 +39,32 @@
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit pkgs;
-      inherit specialArgs;
+      specialArgs = specialArgs;
       modules = [
         ./system
         ./services
         ./packages
+
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            # useGlobalPkgs = true;
+            # useUserPackages = true;
+            extraSpecialArgs = {inherit inputs pkgs;};
+            users.jpierro = {
+              imports = [
+                ./packages/home.nix
+              ];
+              programs.home-manager.enable = true;
+              systemd.user.startServices = "sd-switch";
+              home = {
+                stateVersion = "25.05";
+                username = "jpierro";
+                homeDirectory = "/home/jpierro";
+              };
+            };
+          };
+        }
       ];
     };
   };

@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs.fishPlugins; [
+  home.packages = with pkgs.fishPlugins; [
     pkgs.grc
     pkgs.fzf
     pkgs.done
