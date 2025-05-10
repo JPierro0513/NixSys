@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  homeImports,
   ...
 }: {
   flake.nixosConfigurations = let
@@ -11,23 +10,33 @@
     nixos = nixosSystem {
       inherit specialArgs;
       modules = [
+        inputs.chaotic.nixosModules.default
+        inputs.home-manager.nixosModules.default
+
         ./configuration.nix
         ./hardware-configuration.nix
-        ./core
         ./nix
-        ./hardware
         ./services
-        ./programs
+        ./packages
 
         {
           home-manager = {
-            users.jpierro.imports =
-              homeImports."jpierro@nixos";
             extraSpecialArgs = specialArgs;
+            users.jpierro.imports = [
+              ../home/services
+              ../home/packages
+              ../home/stylix.nix
+              {
+                home = {
+                  username = "jpierro";
+                  homeDirectory = "/home/jpierro";
+                  stateVersion = "25.05";
+                };
+                programs.home-manager.enable = true;
+              }
+            ];
           };
         }
-
-        inputs.chaotic.nixosModules.default
       ];
     };
   };

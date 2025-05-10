@@ -1,32 +1,82 @@
 {
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
     kernelModules = ["amdgpu"];
     kernelParams = [
       "amd_pstate=active"
       "amd_iommu"
       "mitigations=off"
-      # "ideapad_laptop.allow_v4_dytc=Y"
       "nvme_core.default_ps_max_latency_us=0"
+      "quiet"
+      "systemd.show_status=auto"
+      "rd.udev.log_level=3"
+      "plymouth.use-simpledrm"
     ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
       "vm.vfs_cache_pressure" = 50;
       "vm.dirty_ratio" = 10;
       "vm.dirty_background_ratio" = 5;
-
       "kernel.nmi_watchdog" = 0;
     };
-    # extraModprobeConfig = ''
-    #   options v4l2loopback exclusive_caps=1 card_label="OBS Virtual Output"
-    # '';
+    bootspec.enable = true;
+    initrd.systemd.enable = true;
+    plymouth.enable = true;
+    tmp.cleanOnBoot = true;
+  };
+  environment.systemPackages = [config.boot.kernelPackages.cpupower];
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 25;
   };
 
-  networking.hostName = "nixos";
+  security.pam.services.hyprlock.text = "auth include login";
 
-  services = {
-    # for SSD/NVME
-    fstrim.enable = true;
-    scx.enable = true;
-    scx.scheduler = "scx_rusty";
+  # networking.hostName = "nixos";
+  # networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    interfaces.wlo1.useDHCP = lib.mkDefault true; #enp3s0
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
   };
+
+  # Set your time zone.
+  time.timeZone = "America/New_York";
+  services.geoclue2.enable = true;
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {LC_ALL = "en_US.UTF-8";};
+
+  # Hardware GPU acceleration
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd];
+    };
+    amdgpu.amdvlk.enable = true;
+  };
+
+  # Define a user account.
+  users.users.jpierro = {
+    shell = pkgs.fish;
+    isNormalUser = true;
+    extraGroups = ["wheel" "networkmanager" "audio" "video" "input" "dialout"];
+  };
+  environment.localBinInPath = true;
+  services.getty.autologinUser = "jpierro";
+
+  system.stateVersion = "25.05"; # Did you read the comment?
 }
