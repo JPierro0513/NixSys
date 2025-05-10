@@ -13,7 +13,6 @@
     forgit
     hydro
     transient-fish
-    sponge
     pisces
   ];
 

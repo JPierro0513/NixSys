@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   boot = {
@@ -41,11 +42,18 @@
 
   security.pam.services.hyprlock.text = "auth include login";
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  # networking.hostName = "nixos";
+  # networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    interfaces.wlo1.useDHCP = lib.mkDefault true; #enp3s0
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
+  services.geoclue2.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";

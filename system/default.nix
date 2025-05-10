@@ -21,6 +21,7 @@
 
         {
           home-manager = {
+            extraSpecialArgs = specialArgs;
             users.jpierro.imports = [
               ../home/services
               ../home/packages
@@ -34,7 +35,6 @@
                 programs.home-manager.enable = true;
               }
             ];
-            extraSpecialArgs = specialArgs;
           };
         }
       ];

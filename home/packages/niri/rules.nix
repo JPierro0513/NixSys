@@ -114,6 +114,14 @@
       };
     }
   ];
+
+  layerRules = [
+    {
+      matches = [{app-id = "waybar";}];
+      opacity = 0.1;
+      block-out-from = "screencast";
+    }
+  ];
 in {
-  programs.niri.settings.window-rules = windowRules ++ floatingRules;
+  programs.niri.settings.window-rules = windowRules ++ floatingRules ++ layerRules;
 }

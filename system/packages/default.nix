@@ -72,7 +72,10 @@
     enableSSHSupport = true;
   };
 
-  services.ollama.enable = true;
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-rocm;
+  };
 
   programs.gamemode = {
     enable = true;

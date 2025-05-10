@@ -5,18 +5,18 @@
   buildFHSEnv,
 }: let
   fhsEnv = buildFHSEnv {
-    name = "esp32-toolchain-env";
+    name = "esp-toolchain-env";
     targetPkgs = pkgs: with pkgs; [zlib];
-    runScript = "";
+    # runScript = "";
   };
 in
   stdenv.mkDerivation rec {
-    pname = "esp32-toolchain";
-    version = "2021r2-patch3";
+    pname = "esp-toolchain";
+    version = "14.2.0_20241119";
 
     src = fetchurl {
-      url = "https://github.com/espressif/crosstool-NG/releases/download/esp-${version}/xtensa-esp32-elf-gcc8_4_0-esp-${version}-linux-amd64.tar.gz";
-      hash = "sha256-nt0ed2J2iPQ1Vhki0UKZ9qACG6H2/2fkcuEQhpWmnlM=";
+      url = "https://github.com/espressif/crosstool-NG/releases/download/esp-${version}/xtensa-esp-elf-${version}-x86_64-linux-gnu.tar.gz";
+      hash = "";
     };
 
     buildInputs = [makeWrapper];
@@ -29,7 +29,7 @@ in
         FILE_PATH="$out/bin/$FILE"
         if [[ -x $FILE_PATH ]]; then
           mv $FILE_PATH $FILE_PATH-unwrapped
-          makeWrapper ${fhsEnv}/bin/esp32-toolchain-env $FILE_PATH --add-flags "$FILE_PATH-unwrapped"
+          makeWrapper ${fhsEnv}/bin/esp-toolchain-env $FILE_PATH --add-flags "$FILE_PATH-unwrapped"
         fi
       done
     '';

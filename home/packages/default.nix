@@ -3,16 +3,16 @@
   config,
   inputs,
   ...
-}: let
-  conf = config.xdg.configHome;
-  cache = config.xdg.cacheHome;
-in {
+}:
+# let
+#   conf = config.xdg.configHome;
+#   cache = config.xdg.cacheHome;
+# in
+{
   imports = [
     ../../system/nix/nixpkgs.nix
     ./niri
   ];
-
-  # nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     fd
@@ -60,6 +60,9 @@ in {
     openttd
     forge-mtg
     cockatrice
+    openmw
+    lutris
+
 
     # gnome
     dconf-editor

@@ -23,13 +23,14 @@
         inputs',
         pkgs,
         system,
+        lib,
         ...
       }: {
         formatter = pkgs.alejandra;
 
         packages = import ./pkgs pkgs;
 
-        devShells = import ./shells pkgs;
+        # devShells.esp-idf = import ./shells/esp-idf.nix;
 
         checks =
           inputs'.nixpkgs.lib.attrsets.unionOfDisjoint {

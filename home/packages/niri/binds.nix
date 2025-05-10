@@ -7,6 +7,7 @@
     set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
     brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
+    swaync = spawn "${pkgs.swaynotificationcenter}/bin/swaync-client";
   in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
@@ -28,8 +29,8 @@
 
     "Mod+Space".action = spawn "${pkgs.albert}/bin/albert" "toggle";
     "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
-    "Mod+E".action = spawn "thunar";
-    "Mod+Shift+N".action = spawn "swaync-client -t -sw";
+    "Mod+E".action = spawn "${pkgs.xfce.thunar}/bin/thunar";
+    "Mod+Shift+N".action = swaync "-t" "-sw";
 
     "Ctrl+Alt+L".action = spawn "sh" "-c" "pgrep hyprlock || hyprlock";
 
