@@ -5,7 +5,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:danth/stylix";
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +28,6 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    specialArgs = {inherit self inputs;};
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
@@ -34,38 +40,54 @@
         (final: prev: {})
       ];
     };
+    specialArgs = {inherit (self) inputs outputs;};
   in {
     formatter = pkgs.alejandra;
 
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit pkgs;
-      specialArgs = specialArgs;
-      modules = [
-        ./system
-        ./services
-        ./packages
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        inherit pkgs;
+        specialArgs = specialArgs;
+        modules = [
+          ./system
 
-        inputs.home-manager.nixosModules.default
-        {
-          home-manager = {
-            # useGlobalPkgs = true;
-            # useUserPackages = true;
-            extraSpecialArgs = {inherit inputs pkgs;};
-            users.jpierro = {
-              imports = [
-                ./packages/home.nix
-              ];
-              programs.home-manager.enable = true;
-              systemd.user.startServices = "sd-switch";
-              home = {
-                stateVersion = "25.05";
-                username = "jpierro";
-                homeDirectory = "/home/jpierro";
+          inputs.home-manager.nixosModules.default
+          inputs.stylix.nixosModules.stylix
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.jpierro = {
+                home = {
+                  stateVersion = "25.05";
+                  username = "jpierro";
+                  homeDirectory = "/home/jpierro";
+                };
+                imports = [
+                  ./home/packages
+
+                  ./home/stylix.nix
+                ];
+                programs.home-manager.enable = true;
+                systemd.user.startServices = "sd-switch";
               };
+              backupFileExtension = "bak";
+              extraSpecialArgs = specialArgs;
             };
-          };
-        }
-      ];
+          }
+        ];
+      };
+    };
+
+    checks = {
+      pre-commit-check = inputs.git-hooks-nix.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          alejandra.enable = true;
+          deadnix.enable = true;
+          statix.enable = true;
+        };
+      };
     };
   };
 }

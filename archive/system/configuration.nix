@@ -48,7 +48,7 @@
     hostName = "nixos";
     networkmanager.enable = true;
     interfaces.wlo1.useDHCP = lib.mkDefault true; #enp3s0
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = ["1.1.1.1" "8.8.8.8"];
   };
 
   # Set your time zone.

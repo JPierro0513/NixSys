@@ -63,7 +63,6 @@
     openmw
     lutris
 
-
     # gnome
     dconf-editor
     pwvucontrol

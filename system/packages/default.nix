@@ -5,8 +5,6 @@
 }: {
   imports = [
     ./thunar.nix
-
-    ./niri
   ];
 
   environment.systemPackages = with pkgs; [
@@ -46,6 +44,7 @@
     python3Packages.pip
     rustup
     nixd
+    nil
     alejandra
     lua-language-server
     vscode-langservers-extracted

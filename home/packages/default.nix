@@ -6,6 +6,8 @@
   imports = [
     ./fish.nix
     ./portal.nix
+
+    ./niri
   ];
 
   home.packages = with pkgs; [

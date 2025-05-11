@@ -32,7 +32,8 @@
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
     loader = {
-      limine.enable = true;
+      # limine.enable = true;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
   };
