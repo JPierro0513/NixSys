@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{
+  # config,
+  pkgs,
+  ...
+}: let
+  # pointer = config.home.pointerCursor;
   makeCommand = command: {
     command = [command];
   };
@@ -7,19 +12,19 @@ in {
     enable = true;
     package = pkgs.niri;
     settings = {
-      # spawn-at-startup = [
-      #   (makeCommand "swww-daemon")
-      #   # (makeCommand "swww img ~/wallpapers/nixos.png")
-      #   (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
-      #   (makeCommand "wl-paste --watch cliphist store")
-      #   (makeCommand "${pkgs.waybar}/bin/waybar")
-      #   (makeCommand "xwayland-satellite")
-      #   (makeCommand "albert")
-      #   (makeCommand "nm-applet" "--indicator")
-      #   (makeCommand "systemctl" "--user" "import-environment")
-      #   (makeCommand "hash" "dbus-update-activation-environment" "2>/dev/null")
-      #   (makeCommand "dbus-update-activation-environment" "--systemd")
-      # ];
+      spawn-at-startup = [
+        (makeCommand "swww-daemon")
+        # (makeCommand "swww img ~/wallpapers/nixos.png")
+        (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
+        (makeCommand "wl-paste --watch cliphist store")
+        (makeCommand "${pkgs.waybar}/bin/waybar")
+        (makeCommand "xwayland-satellite")
+        (makeCommand "albert")
+        (makeCommand "nm-applet --indicator")
+        (makeCommand "systemctl --user import-environment")
+        (makeCommand "hash dbus-update-activation-environment 2>/dev/null")
+        (makeCommand "dbus-update-activation-environment --systemd")
+      ];
       environment = {
         DISPLAY = ":0";
         GDK_BACKEND = "wayland,x11";
