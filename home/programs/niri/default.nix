@@ -1,0 +1,36 @@
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [
+    inputs.niri.homeModules.niri
+
+    ./settings.nix
+    ./binds.nix
+    ./rules.nix
+  ];
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
+
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  home.packages = with pkgs; [
+    seatd
+    grimblast
+    wl-clipboard
+    cliphist
+    brightnessctl
+    pwvucontrol
+    swaynotificationcenter
+    hypridle
+    hyprlock
+    swww
+    waybar
+    xwayland-satellite
+    albert
+  ];
+}

@@ -1,13 +1,9 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    ./fish.nix
-    ./portal.nix
+    ./stylix.nix
 
-    ./niri
+    ./programs/fish.nix
+    ./programs/niri
   ];
 
   home.packages = with pkgs; [
@@ -50,6 +46,22 @@
       credential.helper = "${
         pkgs.git.override {withLibsecret = true;}
       }/bin/git-credential-libsecret";
+    };
+  };
+
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    Unit.Description = "polkit-gnome-authentication-agent-1";
+    Install = {
+      WantedBy = ["graphical-session.target"];
+      Wants = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 }

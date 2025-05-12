@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs.fishPlugins; [
     pkgs.grc
-    pkgs.fzf
     pkgs.done
 
     grc

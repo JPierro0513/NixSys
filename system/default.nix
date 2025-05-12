@@ -1,10 +1,8 @@
 {
   imports = [
-    ./hardware_configuration.nix
     ./configuration.nix
-    ./nix
-
+    ./hardware-configuration.nix
     ./services
-    ./packages
+    ./programs
   ];
 }
