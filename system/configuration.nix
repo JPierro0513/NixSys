@@ -51,7 +51,7 @@
   i18n.extraLocaleSettings = {LC_ALL = "en_US.UTF-8";};
   console = {
     # font = "Lat2-Terminus16";
-    keyMap = "us";
+    keyMap = lib.mkForce "us";
     useXkbConfig = true; # use xkb.options in tty.
   };
 
@@ -70,6 +70,9 @@
     extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd];
   };
   hardware.amdgpu.amdvlk.enable = true;
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }

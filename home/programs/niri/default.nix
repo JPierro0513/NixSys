@@ -8,13 +8,8 @@
 
     ./settings.nix
     ./binds.nix
-    ./rules.nix
+    # ./rules.nix
   ];
-
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;
-  };
 
   home.sessionVariables.NIXOS_OZONE_WL = "1";
 
