@@ -29,7 +29,7 @@
 
         {
           services.displayManager = {
-            # sessionPackages = "${pkgs.niri}/bin/niri-session";
+            sessionPackages = pkgs.niri; #"${pkgs.niri}/bin/niri-session";
             sddm = {
               enable = true;
               wayland.enable = true;
@@ -42,7 +42,9 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = specialArgs;
-            users.jpierro.imports = [
+            users.jpierro.imports = let
+              mod = "${self}/home";
+            in [
               {
                 home = {
                   username = "jpierro";
@@ -52,9 +54,9 @@
                 programs.home-manager.enable = true;
               }
 
-	      ./home/services
-              ./home/programs
-              ./home/stylix.nix
+              "${mod}/services"
+              "${mod}/programs"
+              "${mod}/stylix.nix"
             ];
           };
         }

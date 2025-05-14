@@ -5,11 +5,10 @@
 }: let
   extraSpecialArgs = {inherit inputs self;};
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
-  pkgs = import inputs.nixpkgs {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-    
-  };
+  # pkgs = import inputs.nixpkgs {
+  #   system = "x86_64-linux";
+  #   config.allowUnfree = true;
+  # };
 in {
   flake.homeConfiguration = {
     "jpierro@nixos" = homeManagerConfiguration {
@@ -22,9 +21,8 @@ in {
           };
           programs.home-manager.enable = true;
         }
-        
       ];
-      inherit extraSpecialArgs pkgs;
+      inherit extraSpecialArgs; #pkgs;
     };
   };
 }

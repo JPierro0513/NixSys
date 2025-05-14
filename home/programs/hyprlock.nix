@@ -1,4 +1,4 @@
-_: {
+{lib, ...}: {
   programs.hyprlock = {
     enable = true;
 
@@ -11,7 +11,7 @@ _: {
 
       background = [
         {
-          monitor = "";
+          monitor = "eDP-1";
           path = "screenshot";
           blur_passes = 3;
           blur_size = 12;
@@ -25,7 +25,7 @@ _: {
 
       input-field = [
         {
-          monitor = "";
+          monitor = "eDP-1";
 
           size = "300, 50";
           valign = "bottom";
@@ -55,7 +55,7 @@ _: {
         {
           monitor = "";
           text = ''
-            cmd[update:1000] echo "<span font-weight='light' >$(date +'%I:%M %N')</span>"
+            cmd[update:1000] echo "<span font-weight='light' >$(date +'%I %M')</span>"
           '';
           font_size = 300;
           font_family = "Adwaita Sans Thin";

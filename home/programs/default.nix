@@ -9,6 +9,8 @@
   ];
 
   home.packages = with pkgs; [
+    thundery
+
     vesktop
     onlyoffice-bin
     ladybird
