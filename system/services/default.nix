@@ -3,7 +3,6 @@
     ./bluetooth.nix
     ./power.nix
     ./location.nix
-    ./gnome-services.nix
   ];
 
   services.pipewire = {
