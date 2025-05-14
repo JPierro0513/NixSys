@@ -25,23 +25,31 @@
         ./services
         ./programs
 
-        {
-          services.displayManager = {
-            sessionPackages = ["${pkgs.niri}/bin/niri-session"];
-            sddm = {
-              enable = true;
-              wayland.enable = true;
-            };
-          };
-        }
+        # {
+        #   services.displayManager = {
+        #     sessionPackages = ["${pkgs.niri}/bin/niri-session"];
+        #     sddm = {
+        #       enable = true;
+        #       wayland.enable = true;
+        #     };
+        #   };
+        # }
 
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = specialArgs;
-            users.jpierro.imports = [
-            ];
+            # users.jpierro.imports = [
+            #   {
+            #     home = {
+            #       username = "jpierro";
+            #       homeDirectory = "/home/jpierro";
+            #       stateVersion = "25.05";
+            #     };
+            #     programs.home-manager.enable = true;
+            #   }
+            # ];
           };
         }
       ];

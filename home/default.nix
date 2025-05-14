@@ -18,10 +18,6 @@ in {
   flake.homeConfiguration = {
     "jpierro@nixos" = homeManagerConfiguration {
       modules = [
-        ./services
-        ./programs
-        ./stylix
-
         {
           home = {
             username = "jpierro";
@@ -30,6 +26,9 @@ in {
           };
           programs.home-manager.enable = true;
         }
+        ./services
+        ./programs
+        ./stylix
       ];
       inherit extraSpecialArgs pkgs;
     };

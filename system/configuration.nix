@@ -43,7 +43,7 @@
 
   boot = {
     kernelModules = ["kvm-amd" "amdgpu"];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+    # kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
     kernelParams = [
       "amd_pstate=active"
       "amd_iommu"

@@ -7,7 +7,7 @@
       source-serif-pro
       rubik
       nerd-fonts.symbols-only
-      maple-mono-NF
+      maple-mono.NF
     ];
     enableDefaultPackages = true;
     fontconfig = {
