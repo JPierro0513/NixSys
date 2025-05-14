@@ -23,7 +23,7 @@
         rgba = "rgb";
       };
       defaultFonts = let
-        addAll = builtins.mapAttrs (_: v: ["Symbols Nerd Font"] ++ v ++ ["Noto Color Emoji"]);
+        addAll = builtins.mapAttrs (_: v: v ++ ["Symbols Nerd Font"] ++ ["Noto Color Emoji"]);
       in
         addAll {
           serif = ["Source Serif Pro"];

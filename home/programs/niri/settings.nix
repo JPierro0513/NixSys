@@ -17,20 +17,20 @@ in {
         (makeCommand "xwayland-satellite")
         # Wallpaper
         (makeCommand "swww-daemon")
-        (makeCommand "swww img ~/wallpapers/nixos.png")
+        (makeCommand "swww" "img" "$HOME/wallpapers/waves.png")
 
         (makeCommand "${pkgs.waybar}/bin/waybar")
         (makeCommand "albert")
 
         # Utilities
-        (makeCommand "nm-applet --indicator")
+        (makeCommand "nm-applet" "--indicator")
         (makeCommand "blueman-applet")
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
-        (makeCommand "wl-paste --watch cliphist store")
+        (makeCommand "wl-paste" "--watch" "cliphist" "store")
 
-        (makeCommand "systemctl --user import-environment")
-        (makeCommand "hash dbus-update-activation-environment 2>/dev/null")
-        (makeCommand "dbus-update-activation-environment --systemd")
+        (makeCommand "systemctl" "--user" "import-environment")
+        (makeCommand "hash" "dbus-update-activation-environment" "2>/dev/null")
+        (makeCommand "dbus-update-activation-environment" "--systemd")
       ];
       environment = {
         DISPLAY = ":0";

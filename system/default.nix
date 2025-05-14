@@ -28,16 +28,6 @@
         ./programs
 
         {
-          services.displayManager = {
-            sessionPackages = [pkgs.niri]; #"${pkgs.niri}/bin/niri-session";
-            sddm = {
-              enable = true;
-              wayland.enable = true;
-            };
-          };
-        }
-
-        {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;

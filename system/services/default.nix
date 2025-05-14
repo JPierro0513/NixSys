@@ -3,6 +3,7 @@
     ./bluetooth.nix
     ./power.nix
     ./location.nix
+    ./display-manager.nix
   ];
 
   services.pipewire = {
