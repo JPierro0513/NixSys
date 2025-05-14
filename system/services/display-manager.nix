@@ -1,15 +1,10 @@
-{
-  stdenv,
-  fetchFromGitHub,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   theme-ver = "1.5.1";
-  theme-src = fetchFromGitHub {
+  theme-src = pkgs.fetchFromGitHub {
     owner = "EricKotato";
     repo = "sddm-slice";
     rev = theme-ver;
-    hash = "";
+    hash = "sha256-1AxRM2kHOzqjogYjFXqM2Zm8G3aUiRsdPDCYTxxQTyw=";
   };
 in {
   services.displayManager = {
@@ -18,7 +13,7 @@ in {
       enable = true;
       wayland.enable = true;
       extraPackages = [
-        (stdenv.mkDerivation {
+        (pkgs.stdenv.mkDerivation {
           pname = "sddm-slice";
           version = theme-ver;
           src = theme-src;
