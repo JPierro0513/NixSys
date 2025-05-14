@@ -13,14 +13,21 @@ in {
     package = pkgs.niri;
     settings = {
       spawn-at-startup = [
+        #X11 server
+        (makeCommand "xwayland-satellite")
+        # Wallpaper
         (makeCommand "swww-daemon")
-        # (makeCommand "swww img ~/wallpapers/nixos.png")
+        (makeCommand "swww img ~/wallpapers/nixos.png")
+
+        (makeCommand "${pkgs.waybar}/bin/waybar")
+        (makeCommand "albert")
+
+        # Utilities
+        (makeCommand "nm-applet --indicator")
+        (makeCommand "blueman-applet")
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         (makeCommand "wl-paste --watch cliphist store")
-        (makeCommand "${pkgs.waybar}/bin/waybar")
-        (makeCommand "xwayland-satellite")
-        (makeCommand "albert")
-        (makeCommand "nm-applet --indicator")
+
         (makeCommand "systemctl --user import-environment")
         (makeCommand "hash dbus-update-activation-environment 2>/dev/null")
         (makeCommand "dbus-update-activation-environment --systemd")
@@ -37,16 +44,6 @@ in {
         keyboard.xkb.layout = "us";
         mouse.accel-speed = 0.2;
         focus-follows-mouse.enable = true;
-      };
-      outputs = {
-	"DP-1" = {
-          scale = 1;
-	  mode = {
-	    width = 2560;
-	    height = 1440;
-	    refresh = 120.0;
-	  };
-	};
       };
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       layout = {

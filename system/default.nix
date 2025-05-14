@@ -29,7 +29,7 @@
 
         {
           services.displayManager = {
-            sessionPackages = pkgs.niri; #"${pkgs.niri}/bin/niri-session";
+            sessionPackages = [pkgs.niri]; #"${pkgs.niri}/bin/niri-session";
             sddm = {
               enable = true;
               wayland.enable = true;

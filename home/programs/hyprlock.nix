@@ -1,4 +1,5 @@
-{lib, ...}: {
+{
+  stylix.targets.hyprlock.enable = false;
   programs.hyprlock = {
     enable = true;
 
@@ -53,7 +54,7 @@
 
       label = [
         {
-          monitor = "";
+          monitor = "eDP-1";
           text = ''
             cmd[update:1000] echo "<span font-weight='light' >$(date +'%I %M')</span>"
           '';
