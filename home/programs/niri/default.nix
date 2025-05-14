@@ -25,6 +25,7 @@
     wl-clipboard
     cliphist
     brillo
+    playerctl
     pwvucontrol
     swaynotificationcenter
     hypridle
