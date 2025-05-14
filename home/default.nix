@@ -8,11 +8,7 @@
   pkgs = import inputs.nixpkgs {
     system = "x86_64-linux";
     config.allowUnfree = true;
-    overlays = [
-      inputs.niri.overlays.niri
-
-      (final: _prev: import "${self}/packages" final.pkgs)
-    ];
+    
   };
 in {
   flake.homeConfiguration = {
@@ -26,9 +22,7 @@ in {
           };
           programs.home-manager.enable = true;
         }
-        ./services
-        ./programs
-        ./stylix
+        
       ];
       inherit extraSpecialArgs pkgs;
     };
