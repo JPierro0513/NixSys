@@ -8,7 +8,7 @@ rustPlatform.buildRustPackage rec {
   pname = "thundery";
   version = rev;
 
-  src = builtins.fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "loefey";
     repo = "thundery";
     rev = "${version}";
