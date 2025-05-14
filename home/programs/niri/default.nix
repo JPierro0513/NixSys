@@ -11,7 +11,12 @@
     ./rules.nix
   ];
 
-  home.sessionVariables.NIXOS_OZONE_WL = "1";
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+  };
 
   home.packages = with pkgs; [
     seatd
@@ -19,7 +24,7 @@
     grimblast
     wl-clipboard
     cliphist
-    brightnessctl
+    brillo
     pwvucontrol
     swaynotificationcenter
     hypridle

@@ -1,8 +1,9 @@
 {
-  pkgs,
-  config,
+  # config,
   lib,
+  pkgs,
   inputs,
+  config,
   ...
 }: {
   nix = let
@@ -40,39 +41,59 @@
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  boot = {
+    kernelModules = ["kvm-amd" "amdgpu"];
+    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+    kernelParams = [
+      "amd_pstate=active"
+      "amd_iommu"
+      "mitigations=off"
+      "ideapad_laptop.allow_v4_dytc=Y"
+      "nvme_core.default_ps_max_latency_us=0"
+    ];
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "vm.vfs_cache_pressure" = 50;
+      "vm.dirty_ratio" = 10;
+      "vm.dirty_background_ratio" = 5;
+      "kernel.nmi_watchdog" = 0;
+    };
+  };
 
-  # Set your time zone.
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+  # Don't wait for network startup
+  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = ["" "${pkgs.networkmanager}/bin/nm-online -q"];
+
+  security = {
+    tpm2.enable = true;
+    rtkit.enable = true;
+    pam.services.hyprlock.text = "auth include login";
+    sudo.wheelNeedsPassword = false;
+  };
+
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ALL = "en_US.UTF-8";
+    };
+  };
+
+  console.keyMap = "us";
+
+  system.stateVersion = "25.05";
+
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {LC_ALL = "en_US.UTF-8";};
-  console = {
-    # font = "Lat2-Terminus16";
-    keyMap = lib.mkForce "us";
-    useXkbConfig = true; # use xkb.options in tty.
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 25;
   };
 
-  programs.fish.enable = true;
   users.users.jpierro = {
     isNormalUser = true;
-    shell = pkgs.fish;
-    extraGroups = ["wheel" "networkmanager" "dialout" "audio" "video"];
+    shell = pkgs.nushell;
+    extraGroups = ["wheel" "audio" "video" "networkmanager" "dialout"];
   };
-  environment.localBinInPath = true;
-  services.getty.autologinUser = "jpierro";
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [mesa glxinfo rocmPackages.clr.icd];
-  };
-  hardware.amdgpu.amdvlk.enable = true;
-
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-
-  system.stateVersion = "25.05"; # Did you read the comment?
 }

@@ -16,23 +16,5 @@
       light = "Papirus";
     };
     image = null;
-    fonts = {
-      serif = {
-        package = pkgs.source-serif-pro;
-        name = "Source Serif Pro";
-      };
-      sansSerif = {
-        package = pkgs.rubik;
-        name = "Rubik";
-      };
-      monospace = {
-        package = pkgs.maple-mono.NF;
-        name = "Maple Mono NF";
-      };
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
   };
 }

@@ -1,8 +1,49 @@
 {
-  imports = [
-    ./configuration.nix
-    ./hardware-configuration.nix
-    ./services
-    ./programs
-  ];
+  self,
+  inputs,
+  ...
+}: {
+  flake.nixosConfigurations = let
+    inherit (inputs.nixpkgs.lib) nixosSystem;
+    specialArgs = {inherit inputs self;};
+    pkgs = import inputs.nixpkgs {
+      config.allowUnfree = true;
+      overlays = [
+        inputs.neovim-nightly-overlay.overlays.default
+      ];
+    };
+  in {
+    nixos = nixosSystem {
+      inherit pkgs specialArgs;
+      modules = [
+        inputs.home-manager.nixosModules.default
+        inputs.stylix.nixosModules.stylix
+
+        ./configuration.nix
+        ./hardware-configuration.nix
+        ./services
+        ./programs
+
+        {
+          services.displayManager = {
+            sessionPackages = ["${pkgs.niri}/bin/niri-session"];
+            sddm = {
+              enable = true;
+              wayland.enable = true;
+            };
+          };
+        }
+
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = specialArgs;
+            users.jpierro.imports = [
+            ];
+          };
+        }
+      ];
+    };
+  };
 }

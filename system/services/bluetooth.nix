@@ -6,13 +6,15 @@
       General = {
         Enable = "Source,Sink,Media,Socket";
         Experimental = true;
-        FastConnectable = true;
-        JustWorksRepairing = "always";
-        Privacy = "device";
+        # FastConnectable = true;
+        # JustWorksRepairing = "always";
+        # Privacy = "device";
         powerOnBoot = true;
       };
     };
   };
+
+  boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
 
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";

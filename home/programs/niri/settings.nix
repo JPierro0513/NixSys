@@ -38,6 +38,16 @@ in {
         mouse.accel-speed = 0.2;
         focus-follows-mouse.enable = true;
       };
+      outputs = {
+	"DP-1" = {
+          scale = 1;
+	  mode = {
+	    width = 2560;
+	    height = 1440;
+	    refresh = 120.0;
+	  };
+	};
+      };
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       layout = {
         gaps = 8;

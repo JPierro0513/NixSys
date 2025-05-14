@@ -3,50 +3,10 @@
   inputs,
   ...
 }: {
-  imports = [./thunar.nix];
-
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-    git
-    gh
-
-    unzip
-    gzip
-    kdePackages.ark
-
-    kdePackages.kpmcore
-    kdePackages.partitionmanager
-
-    btop
-    nitch
-    killall
-    inputs.nsearch.packages.${pkgs.system}.default
-    meld
-
-    eza
-    bat
-    fd
-    ripgrep
-    fzf
-    zoxide
-    thefuck
-    yazi
-    viu
-    imagemagick
-
-    libgcc
-    libclang
-    nodejs
-    nodePackages.npm
-    python3
-    python3Packages.pip
-    rustup
-    nixd
-    nil
-    alejandra
-    lua-language-server
-    vscode-langservers-extracted
+  imports = [
+    ./packages.nix
+    ./thunar.nix
+    ./fonts.nix
   ];
 
   programs.mtr.enable = true;
@@ -74,14 +34,28 @@
   };
 
   programs.dconf.enable = true;
+  programs.seahorse.enable = true;
 
   programs = {
     gamemode.enable = true;
     gamescope.enable = true;
-    steam = {
-      enable = true;
-      # remotePlay.openFirewall = true;
-      # dedicatedServer.openFirewall = true;
+    steam.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common = {
+        default = ["gnome" "gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+        "org.freedesktop.impl.portal.RemoteDesktop" = "gnome";
+      };
     };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
   };
 }
