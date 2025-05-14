@@ -7,6 +7,7 @@
     inherit (inputs.nixpkgs.lib) nixosSystem;
     specialArgs = {inherit inputs self;};
     pkgs = import inputs.nixpkgs {
+      system = "x86_64-linux";
       config.allowUnfree = true;
       overlays = [
         inputs.neovim-nightly-overlay.overlays.default
