@@ -14,8 +14,6 @@
     };
   };
 
-  boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
-
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
     after = ["network.target" "sound.target"];
@@ -33,7 +31,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     bluez
     bluez-tools
     blueman

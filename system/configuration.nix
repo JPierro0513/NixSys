@@ -58,6 +58,7 @@
       "vm.dirty_background_ratio" = 5;
       "kernel.nmi_watchdog" = 0;
     };
+    extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   };
 
   networking.hostName = "nixos";
