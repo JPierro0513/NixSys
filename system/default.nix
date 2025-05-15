@@ -24,6 +24,7 @@
 
         ./configuration.nix
         ./hardware-configuration.nix
+        ./fonts.nix
 
         {
           home-manager = {

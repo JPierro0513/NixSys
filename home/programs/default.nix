@@ -9,8 +9,6 @@
     ./packages.nix
     ./thunar.nix
 
-    ./fonts.nix
-
     ./hyprlock.nix
     ./niri
   ];
