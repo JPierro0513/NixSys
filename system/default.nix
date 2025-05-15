@@ -25,6 +25,7 @@
         ./configuration.nix
         ./hardware-configuration.nix
         ./services
+        ./programs.nix
         ./fonts.nix
 
         {
