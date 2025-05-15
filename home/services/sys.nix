@@ -28,6 +28,4 @@
   services.printing.enable = true;
   services.openssh.enable = true;
   services.fwupd.enable = true;
-
-  hardware.brillo.enable = true;
 }

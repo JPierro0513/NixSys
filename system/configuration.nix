@@ -89,6 +89,8 @@
     memoryPercent = 25;
   };
 
+  hardware.brillo.enable = true;
+
   users.users.jpierro = {
     isNormalUser = true;
     shell = pkgs.nushell;
