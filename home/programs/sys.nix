@@ -3,12 +3,6 @@
   inputs,
   ...
 }: {
-  imports = [
-    ./packages.nix
-    ./thunar.nix
-    ./fonts.nix
-  ];
-
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
@@ -29,6 +23,7 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
+      glfw-wayland
       libusb1
     ];
   };

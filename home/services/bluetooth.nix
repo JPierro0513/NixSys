@@ -6,9 +6,9 @@
       General = {
         Enable = "Source,Sink,Media,Socket";
         Experimental = true;
-        # FastConnectable = true;
-        # JustWorksRepairing = "always";
-        # Privacy = "device";
+        FastConnectable = true;
+        JustWorksRepairing = "always";
+        Privacy = "device";
         powerOnBoot = true;
       };
     };

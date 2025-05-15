@@ -4,6 +4,13 @@
   ...
 }: {
   imports = [
+    ./sys.nix
+
+    ./packages.nix
+    ./thunar.nix
+
+    ./fonts.nix
+
     ./hyprlock.nix
     ./niri
   ];
@@ -13,7 +20,6 @@
 
     vesktop
     onlyoffice-bin
-    ladybird
     inputs.zen-browser.packages.${pkgs.system}.twilight
     zed-editor
     teams-for-linux

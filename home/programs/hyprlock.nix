@@ -12,7 +12,7 @@
 
       background = [
         {
-          monitor = "eDP-1";
+          monitor = "";
           path = "screenshot";
           blur_passes = 3;
           blur_size = 12;
@@ -26,7 +26,7 @@
 
       input-field = [
         {
-          monitor = "eDP-1";
+          monitor = "";
 
           size = "300, 50";
           valign = "bottom";
@@ -54,9 +54,9 @@
 
       label = [
         {
-          monitor = "eDP-1";
+          monitor = "";
           text = ''
-            cmd[update:1000] echo "<span font-weight='light' >$(date +'%I %M')</span>"
+            cmd[update:1000] echo "<span font-weight='light' >$(date +'%I %M %P')</span>"
           '';
           font_size = 300;
           font_family = "Adwaita Sans Thin";

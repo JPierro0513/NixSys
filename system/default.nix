@@ -24,8 +24,6 @@
 
         ./configuration.nix
         ./hardware-configuration.nix
-        ./services
-        ./programs
 
         {
           home-manager = {

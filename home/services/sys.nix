@@ -1,11 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ./bluetooth.nix
-    ./power.nix
-    ./location.nix
-    ./display-manager.nix
-  ];
-
   services.pipewire = {
     enable = true;
     pulse.enable = true;

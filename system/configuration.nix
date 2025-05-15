@@ -43,13 +43,13 @@
 
   boot = {
     kernelModules = ["kvm-amd" "amdgpu"];
-    # kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
     kernelParams = [
       "amd_pstate=active"
       "amd_iommu"
       "mitigations=off"
       "ideapad_laptop.allow_v4_dytc=Y"
       "nvme_core.default_ps_max_latency_us=0"
+      "quiet"
     ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
@@ -79,11 +79,8 @@
     };
   };
 
-  console.keyMap = "us";
-
-  system.stateVersion = "25.05";
-
   time.timeZone = "America/New_York";
+  console.keyMap = "us";
 
   zramSwap = {
     enable = true;
@@ -96,4 +93,6 @@
     shell = pkgs.nushell;
     extraGroups = ["wheel" "audio" "video" "networkmanager" "dialout"];
   };
+
+  system.stateVersion = "25.05";
 }

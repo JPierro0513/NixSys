@@ -24,7 +24,7 @@ in {
           '';
         })
       ];
-      theme = "slice";
+      theme = "sddm-slice";
     };
   };
 }
