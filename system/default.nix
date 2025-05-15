@@ -24,7 +24,7 @@
 
         ./configuration.nix
         ./hardware-configuration.nix
-        ./bluetooth.nix
+        ./services
         ./fonts.nix
 
         {
