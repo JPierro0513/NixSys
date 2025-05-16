@@ -34,6 +34,11 @@
     cockatrice
   ];
 
+  programs.starship = {
+    enable = true;
+    enableNushellIntegration = true;
+    enableTransience = true;
+  };
   programs.ghostty = {
     enable = true;
     settings = {

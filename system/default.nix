@@ -25,7 +25,6 @@
         ./configuration.nix
         ./hardware-configuration.nix
         ./services
-        ./nushell.nix
         ./programs.nix
         ./thunar.nix
         ./fonts.nix
