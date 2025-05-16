@@ -26,6 +26,7 @@
         ./hardware-configuration.nix
         ./services
         ./programs.nix
+        ./thunar.nix
         ./fonts.nix
 
         {

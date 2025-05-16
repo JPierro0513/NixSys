@@ -4,11 +4,7 @@
   ...
 }: {
   imports = [
-    ./sys.nix
-
     ./packages.nix
-    ./thunar.nix
-
     ./hyprlock.nix
     ./niri
   ];
