@@ -7,6 +7,7 @@
       l = "ls";
       lt = "ls **/*";
       fg = "job unfreeze";
+      cat = "bat";
     };
     extraConfig = ''
       let carapace_completer = {|spans|
@@ -14,31 +15,34 @@
       }
       $env.config = {
         show_banner: false,
-	completions: {
+        completions: {
           case_sensitive: false
-	  quick: true
-	  partial: true
-	  algorithm: "fuzzy"
-	  external: {
+          quick: true
+          partial: true
+          algorithm: "fuzzy"
+          external: {
             enable: true
-	    max_results: 100
-	    completer: $carapace_completer
-	  }
-	}
+            max_results: 100
+            completer: $carapace_completer
+          }
+        }
       }
 
+      $env.PROMPT_COMMAND_RIGHT = {||}
+
       zoxide init nushell --cmd cd | save -f ~/.zoxide.nu
+      source ~/.zoxide.nu
       alias fuck = thefuck $"(history | last 1 | get command | get 0)"
     '';
   };
   carapace.enable = true;
   carapace.enableNushellIntegration = true;
 
-  starship = { 
+  starship = {
     enable = true;
     settings = {
       add_newline = true;
-      character = { 
+      character = {
         success_symbol = "[➜](bold green)";
         error_symbol = "[➜](bold red)";
       };

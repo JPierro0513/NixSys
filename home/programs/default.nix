@@ -38,6 +38,7 @@
     enable = true;
     settings = {
       font-size = 18;
+      font-family = "Maple Mono NF";
       window-padding-x = 5;
       window-padding-y = 5;
       cursor-style = "bar";

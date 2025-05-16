@@ -32,9 +32,9 @@
     yazi
     viu
     imagemagick
+    carapace
 
-    libgcc
-    libclang
+    clang
     nodejs
     nodePackages.npm
     python3
